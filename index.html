@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sayap-Sayap Patah — Kahlil Gibran</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --sepia: #5c3d1e;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --parchment: #f5efe0;
+    --parchment-dark: #e8dcc8;
+    --cream: #faf6ed;
+    --mist: #8b7355;
+    --shadow: rgba(92, 61, 30, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IM Fell English', serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Parchment texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* Decorative side borders */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--sepia) 50%, var(--gold) 100%);
+    z-index: 10;
+  }
+
+  .right-border {
+    position: fixed;
+    top: 0; right: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--sepia) 50%, var(--gold) 100%);
+    z-index: 10;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 6px; right: 6px;
+    background: rgba(245, 239, 224, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gold);
+    z-index: 100;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sepia);
+  }
+
+  .nav-chapters {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-chapters a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    color: var(--mist);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+
+  .nav-chapters a:hover { color: var(--gold); }
+
+  /* Main content */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 120px 60px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Cover */
+  .cover {
+    text-align: center;
+    padding: 80px 0 100px;
+    position: relative;
+  }
+
+  .cover::before {
+    content: '❧';
+    display: block;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease;
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 24px;
+    animation: fadeIn 2s ease 0.3s both;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--sepia);
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease 0.6s both;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .cover-author {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--mist);
+    letter-spacing: 0.2em;
+    margin-bottom: 50px;
+    animation: fadeIn 2s ease 0.9s both;
+  }
+
+  .cover-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    animation: fadeIn 2s ease 1.2s both;
+  }
+
+  .cover-ornament::before,
+  .cover-ornament::after {
+    content: '';
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .cover-ornament span {
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  .translator-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--mist);
+    letter-spacing: 0.08em;
+    animation: fadeIn 2s ease 1.5s both;
+  }
+
+  /* Table of contents */
+  .toc {
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dark);
+    border-left: 3px solid var(--gold);
+    padding: 40px 50px;
+    margin: 60px 0;
+    animation: fadeIn 2s ease 1.8s both;
+  }
+
+  .toc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--parchment-dark);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .toc li:last-child { border-bottom: none; }
+
+  .toc li::before {
+    content: counter(toc, upper-roman);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    min-width: 30px;
+    letter-spacing: 0.1em;
+  }
+
+  .toc a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--sepia);
+    text-decoration: none;
+    transition: color 0.3s;
+    line-height: 1.4;
+  }
+
+  .toc a:hover { color: var(--gold); }
+
+  /* Chapter sections */
+  .chapter {
+    margin: 80px 0;
+    animation: fadeIn 1.5s ease;
+  }
+
+  .chapter-header {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .chapter-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    color: var(--sepia);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .chapter-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .chapter-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-light), transparent);
+  }
+
+  .chapter-divider span {
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  /* Prose */
+  .prose p {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.05rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 1.6em;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .prose p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 0.8;
+    float: left;
+    margin-right: 8px;
+    margin-top: 8px;
+    color: var(--sepia);
+  }
+
+  /* Pull quotes */
+  .pull-quote {
+    margin: 40px -20px;
+    padding: 30px 40px;
+    border-left: 3px solid var(--gold);
+    background: var(--parchment);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--sepia);
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.3;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  /* Section ornament */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin: 50px 0;
+    letter-spacing: 0.5em;
+  }
+
+  /* Final epitaph */
+  .epitaph {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dark);
+    margin: 80px 0;
+  }
+
+  .epitaph p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--sepia);
+    line-height: 1.8;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--parchment-dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--mist);
+    letter-spacing: 0.1em;
+  }
+
+  footer .fleuron {
+    font-size: 1.5rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* Print / mobile */
+  @media (max-width: 600px) {
+    main { padding: 100px 28px 60px; }
+    nav { padding: 12px 20px; }
+    .nav-chapters { display: none; }
+    .pull-quote { margin: 30px 0; }
+    .toc { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="right-border"></div>
+
+<nav>
+  <span class="nav-title">Sayap-Sayap Patah · Gibran</span>
+  <div class="nav-chapters">
+    <a href="#kata-pengantar">Kata Pengantar</a>
+    <a href="#duka-bisu">Duka Bisu</a>
+    <a href="#takdir">Takdir</a>
+    <a href="#serambi">Serambi</a>
+    <a href="#obor">Obor Putih</a>
+    <a href="#badai">Sang Badai</a>
+    <a href="#danau">Telaga Api</a>
+    <a href="#takhta">Singgasana Kematian</a>
+    <a href="#kristus">Kristus & Isytar</a>
+    <a href="#kurban">Pengorbanan</a>
+    <a href="#penyelamat">Penyelamat</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- COVER -->
+  <div class="cover">
+    <p class="cover-subtitle">Kahlil Gibran</p>
+    <h1 class="cover-title"><em>Sayap-Sayap<br>Patah</em></h1>
+    <p class="cover-author">الأجنحة المتكسّرة</p>
+    <div class="cover-ornament"><span>✦</span></div>
+    <p class="translator-note" style="margin-top:36px;">Terjemahan Sastra ke dalam Bahasa Indonesia</p>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <p class="toc-title">Daftar Isi</p>
+    <ol>
+      <li><a href="#kata-pengantar">Kata Pengantar</a></li>
+      <li><a href="#duka-bisu">Duka yang Bisu</a></li>
+      <li><a href="#takdir">Tangan Takdir</a></li>
+      <li><a href="#serambi">Gerbang Menuju Kuil Suci</a></li>
+      <li><a href="#obor">Obor Putih</a></li>
+      <li><a href="#badai">Sang Badai</a></li>
+      <li><a href="#danau">Telaga Api</a></li>
+      <li><a href="#takhta">Di Hadapan Singgasana Kematian</a></li>
+      <li><a href="#kristus">Di Antara Kristus dan Isytar</a></li>
+      <li><a href="#kurban">Sebuah Pengorbanan</a></li>
+      <li><a href="#penyelamat">Sang Penyelamat</a></li>
+    </ol>
+  </div>
+
+  <!-- KATA PENGANTAR -->
+  <div class="chapter" id="kata-pengantar">
+    <div class="chapter-header">
+      <span class="chapter-number">Pembuka</span>
+      <h2 class="chapter-title">Kata Pengantar</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Aku genap berusia delapan belas tahun ketika cinta membuka mataku dengan sinar pendar sihirnya, dan menyentuh jiwaku untuk pertama kalinya dengan jemari apinya, dan Selma Karamy adalah wanita pertama yang membangkitkan jiwaku dengan kecantikannya dan menuntunku ke dalam taman afeksi yang luhur, di mana hari-hari berlalu layaknya mimpi dan malam-malam menjelma perayaan asmara.</p>
+
+      <p>Selma Karamy adalah sosok yang mengajariku memuja keindahan melalui rupa keindahannya sendiri, dan menyingkapkan kepadaku rahasia cinta melalui kasih sayangnya; dialah yang pertama kali menyanyikan puisi kehidupan sejati untukku.</p>
+
+      <p>Setiap pemuda mengenang cinta pertamanya dan berusaha merengkuh kembali jam-jam ajaib itu, yang ingatannya sanggup mengubah relung perasaan terdalamnya dan membuatnya begitu bahagia terlepas dari segala kepahitan misterinya.</p>
+
+      <p>Dalam kehidupan setiap pemuda terdapat seorang "Selma" yang menampakkan diri kepadanya secara tiba-tiba di musim semi kehidupan, yang mengubah kesunyiannya menjadi saat-saat bahagia dan mengisi keheningan malam-malamnya dengan alunan nada.</p>
+
+      <p>Aku tengah tenggelam dalam pusaran pikiran dan kontemplasi, meraba makna alam semesta serta wahyu dari kitab-kitab suci, ketika kudengar CINTA dibisikkan ke telingaku melalui bibir Selma. Hidupku dahulu ibarat pingsan yang panjang, hampa laksana Adam di Firdaus, saat kulihat Selma berdiri di hadapanku bagai pilar cahaya. Dialah Hawa bagi hatiku yang memenuhinya dengan segala rahasia dan keajaiban, serta membuatku meresapi makna kehidupan.</p>
+
+      <p>Hawa yang pertama menuntun Adam keluar dari Firdaus atas kehendaknya sendiri, sementara Selma membuatku melangkah rela ke dalam firdaus cinta murni dan kebajikan melalui kelembutan dan kasihnya; namun apa yang menimpa manusia pertama itu terjadi pula padaku, dan pedang kata-kata berapi yang mengusir Adam dari Firdaus serupa dengan yang menggetarkanku lewat mata pisaunya yang berkilat, memaksaku menjauh dari firdaus cintaku tanpa pernah mendurhakai perintah atau mencicipi buah terlarang.</p>
+
+      <p>Hari ini, setelah bertahun-tahun berlalu, tiada yang tersisa dari mimpi indah itu kecuali kenangan pedih yang mengepak bagai sayap-sayap tak kasat mata di sekelilingku, memenuhi palung hatiku dengan duka, dan mengundang air mata ke pelupukku; dan kekasihku, Selma yang jelita, telah tiada dan tiada yang tersisa untuk mengenangnya kecuali hatiku yang patah dan pusara yang dikelilingi pohon-pohon sanobar. Pusara itu dan hati ini adalah segalanya yang tersisa untuk menjadi saksi atas Selma.</p>
+
+      <p>Keheningan yang menjaga pusara tak menyingkap rahasia Tuhan dalam kegelapan peti mati, dan desir dahan-dahan yang akarnya menyesap elemen-elemen raga tak menuturkan misteri alam kubur, namun helaan napas penderitaan dari hatiku mengabarkan kepada yang hidup akan drama yang telah diperankan oleh cinta, keindahan, dan kematian.</p>
+
+      <div class="pull-quote">
+        Oh, sahabat-sahabat masa mudaku yang tersebar di kota Beirut, bila kalian melewati pemakaman dekat hutan pinus itu, masuklah dalam diam dan melangkahlah perlahan agar tapak kaki kalian tak mengusik lelapnya mereka yang mati, dan berhentilah dengan takzim di pusara Selma, sapalah tanah yang memeluk jasadnya, sebutlah namaku dengan desah napas panjang, dan katakanlah pada dirimu sendiri, "Di sinilah, segala harapan Gibran, yang hidup sebagai tawanan cinta di seberang lautan, terkubur."
+      </div>
+
+      <p>Di sisi pusara itu tumbuh duka Gibran bersama pepohonan sanobar, dan di atas pusara itu jiwanya meratap setiap malam mengenang Selma, bergabung dengan dahan-dahan pohon dalam ratapan sendu, berkabung dan meratapi kepergian Selma, yang kemarin adalah melodi indah di bibir kehidupan dan hari ini adalah rahasia bisu di pelukan bumi.</p>
+
+      <p>Oh, kawan-kawan masa mudaku! Aku memohon kepada kalian atas nama para gadis suci yang telah dicintai oleh hati kalian, untuk meletakkan karangan bunga di pusara yang terabaikan dari kekasihku, karena bunga yang kalian letakkan di pusara Selma ibarat tetesan embun yang jatuh dari mata fajar ke atas kelopak mawar yang layu.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB I -->
+  <div class="chapter" id="duka-bisu">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab I</span>
+      <h2 class="chapter-title">Duka yang Bisu</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Tetanggaku, kalian mengenang fajar masa muda dengan suka cita dan menyesali kepergiannya; namun aku mengenangnya layaknya seorang tahanan yang mengingat jeruji dan belenggu penjaranya. Kalian bertutur tentang tahun-tahun antara masa kanak-kanak dan masa muda sebagai era keemasan yang bebas dari kurungan dan beban, tetapi aku menyebut tahun-tahun itu sebagai era duka yang bisu, yang jatuh bagai benih ke dalam hatiku dan tumbuh bersamanya, tak menemukan jalan keluar menuju dunia Pengetahuan dan kebijaksanaan hingga cinta datang membuka pintu-pintu hati dan menerangi sudut-sudutnya.</p>
+
+      <p>Cinta membekaliku dengan lidah dan air mata. Kalian mengingat taman-taman dan anggrek dan tempat pertemuan serta sudut-sudut jalan yang menjadi saksi permainan kalian dan mendengar bisikan kepolosan kalian; dan aku pun mengingat titik indah di Lebanon Utara itu. Setiap kali kupejamkan mata, kulihat lembah-lembah yang sarat akan sihir dan kehormatan, serta pegunungan yang berselimut kemuliaan dan keagungan yang berusaha menggapai langit. Setiap kali kututup telingaku dari hiruk-pikuk kota, kudengar gemericik anak sungai dan desir dahan-dahan.</p>
+
+      <p>Semua keindahan yang kubicarakan sekarang dan yang sangat ingin kulihat, layaknya bayi yang merindukan dada ibunya, telah melukai jiwaku yang terpenjara dalam kegelapan masa muda, layaknya seekor elang yang menderita di dalam sangkarnya saat melihat sekawanan burung terbang bebas di langit yang lapang. Lembah-lembah dan perbukitan itu membakar imajinasiku, namun pikiran-pikiran pahit menenun jaring keputusasaan di sekeliling hatiku.</p>
+
+      <p>Setiap kali aku pergi ke padang, aku kembali dengan kecewa, tanpa memahami apa sebab kekecewaanku. Setiap kali aku menatap langit kelabu, kurasakan hatiku menyusut. Setiap kali kudengar kicau burung dan gumam mata air, aku menderita tanpa mengerti alasan penderitaanku. Konon, keluguan membuat seorang manusia menjadi hampa, dan kehampaan membuatnya terbebas dari gundah. Mungkin hal itu benar di antara mereka yang lahir dalam keadaan mati dan eksis laksana mayat yang membeku; tetapi anak lelaki yang sensitif, yang merasa begitu banyak dan tahu begitu sedikit, adalah makhluk paling malang di bawah matahari, karena ia terkoyak oleh dua kekuatan.</p>
+
+      <p>Kekuatan pertama mengangkatnya dan memperlihatkan padanya keindahan eksistensi melalui awan mimpi-mimpi; kekuatan kedua mengikatnya ke bumi dan memenuhi matanya dengan debu, lalu menguasainya dengan ketakutan dan kegelapan.</p>
+
+      <div class="pull-quote">
+        Kesunyian memiliki tangan selembut sutra, tetapi dengan jemari yang kuat ia mencengkeram hati dan membuatnya berdenyut ngilu oleh duka. Kesunyian adalah sekutu kesedihan, sekaligus sahabat bagi peninggian spiritual.
+      </div>
+
+      <p>Jiwa sang anak yang menanggung badai penderitaan ibarat bunga bakung putih yang baru saja mekar. Ia gemetar diterpa angin sepoi-sepoi, membuka hatinya pada fajar yang merekah, dan melipat kembali kelopaknya kala bayangan malam tiba. Jika anak itu tak memiliki hiburan, kawan, atau teman dalam permainannya, hidupnya akan seperti penjara sempit di mana ia tak melihat apa pun selain sarang laba-laba dan tak mendengar apa pun selain rayapan serangga.</p>
+
+      <p>Kesedihan yang merasuku semasa muda bukanlah disebabkan oleh kurangnya hiburan, karena aku bisa saja mendapatkannya; bukan pula dari ketiadaan teman, karena aku bisa saja menemukan mereka. Kesedihan itu bersumber dari keluhan batin yang membuatku mencintai kesunyian. Ia membunuh kecenderunganku terhadap permainan dan senda gurau. Ia merenggut sayap-sayap masa muda dari pundakku dan menjadikanku serupa genangan air di antara pegunungan, yang memantulkan bayangan hantu dan warna-warni awan serta pepohonan di permukaannya yang tenang, namun tak mampu menemukan jalan keluar untuk mengalir dan bernyanyi menuju lautan.</p>
+
+      <p>Demikianlah hidupku sebelum aku mencapai usia delapan belas tahun. Tahun itu ibarat puncak gunung dalam hidupku, karena ia membangunkan pengetahuan di dalam diriku dan membuatku mengerti akan pasang surut umat manusia. Di tahun itulah aku terlahir kembali, dan kecuali jika seseorang dilahirkan kembali, hidupnya akan tetap menjadi lembaran kosong dalam kitab eksistensi. Di tahun itu, kulihat malaikat-malaikat surga menatapku melalui sepasang mata seorang wanita jelita. Aku juga melihat setan-setan neraka mengamuk di dalam hati seorang pria yang keji. Barang siapa tak melihat malaikat dan iblis dalam keindahan dan kejahatan hidup, ia akan jauh dari pengetahuan, dan jiwanya akan hampa dari afeksi.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB II -->
+  <div class="chapter" id="takdir">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab II</span>
+      <h2 class="chapter-title">Tangan Takdir</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Di musim semi pada tahun yang menakjubkan itu, aku berada di Beirut. Taman-taman dipenuhi bunga Nisan, dan bumi berkarpetkan rumput hijau, bagaikan rahasia bumi yang disingkapkan kepada Surga. Pohon-pohon jeruk dan apel, tampak seperti bidadari atau pengantin yang diutus alam untuk mengilhami para penyair dan membangkitkan imajinasi, mengenakan gaun putih dari kelopak yang harum semerbak.</p>
+
+      <p>Musim semi itu indah di mana-mana, namun paling jelita di Lebanon. Ia adalah roh yang mengembara mengelilingi bumi namun melayang-layang di atas Lebanon, bercakap-cakap dengan para raja dan nabi, menyanyikan Kidung Agung Salomo bersama sungai-sungai, dan mengulang kenangan kejayaan masa lampau bersama Pohon Aras Suci Lebanon. Beirut, terbebas dari lumpur musim dingin dan debu musim panas, laksana seorang pengantin wanita di musim semi, atau bagai putri duyung yang duduk di tepi sungai mengeringkan kulit halusnya di bawah sinar mentari.</p>
+
+      <p>Suatu hari, di bulan Nisan, aku pergi mengunjungi seorang kawan yang rumahnya agak jauh dari kota yang gemerlap itu. Saat kami tengah berbincang, seorang pria berwibawa berusia sekitar enam puluh lima tahun memasuki rumah. Ketika aku bangkit untuk menyapanya, temanku memperkenalkannya kepadaku sebagai Farris Effandi Karamy, lalu menyebutkan namaku dengan untaian kata sanjungan. Pria tua itu menatapku sejenak, menyentuh dahinya dengan ujung jarinya seakan berusaha memanggil kembali ingatannya. Kemudian ia menghampiriku seraya tersenyum dan berkata, "Engkau adalah putra dari seorang sahabatku yang sangat terkasih, dan aku sungguh bahagia dapat melihat sahabatku itu dalam perwujudanmu."</p>
+
+      <p>Sangat tersentuh oleh kata-katanya, aku tertarik kepadanya bagaikan burung yang nalurinya menuntun ke sarang sebelum datangnya badai. Begitu kami duduk, ia menceritakan tentang persahabatannya dengan ayahku, mengenang masa-masa yang mereka habiskan bersama. Seorang pria tua senang kembali dalam kenangan ke hari-hari masa mudanya, layaknya seorang perantau yang rindu pulang ke tanah airnya. Ia gemar menuturkan kisah-kisah masa lalu bagai penyair yang menikmati melantunkan puisi terbaiknya. Ia hidup secara spiritual di masa lalu karena masa kini berlalu teramat cepat, dan masa depan tampak baginya sebagai langkah menuju kealpaan di liang lahat. Satu jam yang sarat dengan kenangan lama berlalu laksana bayangan pepohonan yang menyapu rerumputan.</p>
+
+      <p>Saat Farris Effandi bersiap untuk beranjak, ia meletakkan tangan kirinya di bahuku dan menjabat tangan kananku, seraya berkata, "Aku belum bersua ayahmu selama dua puluh tahun. Kuharap engkau bersedia menggantikan tempatnya dengan sering berkunjung ke rumahku." Aku berjanji dengan penuh rasa syukur untuk menunaikan baktiku terhadap sahabat karib ayahku.</p>
+
+      <p>Setelah pria tua itu meninggalkan rumah, aku meminta temanku untuk berkisah lebih banyak tentangnya. Ia berkata, "Aku tidak mengenal pria lain di Beirut yang kekayaannya telah membuatnya begitu baik hati, dan yang kebaikannya telah membuatnya begitu kaya. Ia adalah satu dari sedikit orang yang datang ke dunia ini dan meninggalkannya tanpa melukai siapa pun, tetapi orang-orang semacam itu biasanya bernasib malang dan tertindas karena mereka tak cukup licik untuk menyelamatkan diri dari kepalsuan orang lain. Farris Effandi memiliki seorang putri yang sifatnya serupa dengannya, dan kecantikan serta keanggunannya melampaui segala lukisan, dan ia pun akan menderita karena kekayaan ayahnya telah menempatkannya di tepi jurang yang mengerikan."</p>
+
+      <p>Saat ia merapalkan kata-kata ini, aku menyadari bahwa raut wajahnya mendung. Lalu ia melanjutkan, "Farris Effandi adalah pria tua yang baik dengan hati yang mulia, namun ia tak memiliki kekuatan kehendak.</p>
+
+      <div class="pull-quote">
+        Orang-orang menuntunnya layaknya orang buta. Putrinya mematuhinya terlepas dari harga diri dan kecerdasannya, dan inilah rahasia yang mengintai dalam kehidupan ayah dan anak itu.
+      </div>
+
+      <p>Rahasia ini diendus oleh seorang pria berhati keji yang merupakan seorang uskup, yang kebusukannya bersembunyi di balik bayang-bayang Injilnya. Ia memperdaya orang-orang agar percaya bahwa ia bajik dan luhur. Ia adalah pemuka agama di tanah pusaka agama-agama ini. Orang-orang patuh dan memujanya. ia menggiring mereka layaknya kawanan domba ke altar pejagalan. Uskup ini memiliki seorang keponakan yang dipenuhi oleh kebencian dan kebobrokan. Cepat atau lambat, hari itu akan tiba ketika ia menempatkan keponakannya di sisi kanannya dan putri Farris Effandi di sisi kirinya, lalu, seraya menggenggam mahkota pernikahan di atas kepala mereka dengan tangannya yang nista, ia akan mengikat seorang perawan suci dengan seorang begundal kotor, menempatkan hati sang siang ke dalam rengkuhan sang malam.</p>
+
+      <p>Hanya itu yang sanggup kuceritakan kepadamu tentang Farris Effandi dan putrinya, jadi jangan cecar aku dengan pertanyaan lagi."</p>
+
+      <p>Sambil berkata demikian, ia memalingkan wajahnya ke arah jendela seolah-olah ia sedang berusaha memecahkan teka-teki eksistensi manusia dengan memusatkan perhatian pada keagungan alam semesta.</p>
+
+      <p>Saat aku meninggalkan rumah itu, kuberitahu temanku bahwa aku akan mengunjungi Farris Effandi dalam beberapa hari ke depan demi menepati janjiku, dan demi persahabatan yang telah menautkannya dengan ayahku. Ia menatapku sejenak, dan aku melihat pendar perubahan pada ekspresinya seakan-akan beberapa kata sederhanaku telah menyingkapkan sebuah ilham baru baginya. Kemudian ia menatap lurus menembus mataku dengan cara yang ganjil, sebuah tatapan kasih, belas kasihan, dan ketakutan—tatapan seorang nabi yang meramalkan apa yang tak dapat diterka oleh siapa pun. Lalu bibirnya sedikit bergetar, namun ia tak mengucapkan sepatah kata pun saat aku mulai melangkah ke ambang pintu. Tatapan ganjil itu senantiasa membayangiku, makna yang tak sanggup kucerna hingga aku tumbuh dewasa dalam dunia pengalaman, di mana hati saling menafsir secara intuitif dan di mana jiwa-jiwa matang oleh madu pengetahuan.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB III -->
+  <div class="chapter" id="serambi">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab III</span>
+      <h2 class="chapter-title">Gerbang Menuju Kuil Suci</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Dalam beberapa hari, kesepian menaklukkanku; dan aku jemu akan wajah-wajah muram dari lembaran buku; kusewa sebuah kereta kuda dan bertolak menuju kediaman Farris Effandi. Saat aku mencapai hutan pinus di mana orang-orang beranjak untuk bertamasya, sang kusir mengambil jalan meretas, yang dinaungi pohon-pohon dedalu di kedua sisinya. Melintasinya, kami disuguhi keindahan rumput yang menghijau, sulur-sulur anggur, dan aneka rupa bunga Nisan yang baru saja merekah.</p>
+
+      <p>Dalam hitungan menit, kereta berhenti di depan sebuah rumah yang menyendiri di pusaran taman yang memesona. Aroma mawar, kacapiring, dan melati merajai udara. Saat aku menjejakkan kaki dan memasuki taman yang lengang itu, kulihat Farris Effandi melangkah menyambutku. Ia menuntunku ke dalam rumahnya dengan sapaan hangat dan duduk di sisiku, bak seorang ayah yang berbinar tatkala melihat putranya, menghujaniku dengan rentetan tanya seputar kehidupanku, masa depanku, dan tapak pendidikanku. Aku meresponsnya, suaraku sarat akan ambisi dan asa yang menyala; karena kudengar gema gita kemuliaan berdentang di telingaku, dan aku tengah mengarungi lautan tenang mimpi-mimpi yang membuai harapan.</p>
+
+      <p>Tepat pada saat itu, seorang wanita muda yang elok rupawan, berbalut gaun sutra putih yang gemerlap, muncul dari balik tirai beledu pintu dan berjalan mengalun ke arahku. Farris Effandi dan aku bangkit dari tempat duduk kami.</p>
+
+      <p>"Ini putriku Selma," ujar sang pria tua. Kemudian ia memperkenalkanku kepadanya, mengatakan, "Takdir telah membawa pulang kepadaku seorang sahabat lama yang terkasih dalam wujud putranya." Selma menatapku sejenak seolah meragukan bahwa seorang tamu sanggup menembus masuk ke rumah mereka. Tangannya, tatkala kusentuh, bagaikan bunga bakung yang seputih salju, dan sebersit ngilu yang ganjil menghujam relung hatiku.</p>
+
+      <p>Kami semua terhanyut dalam diam seolah-olah Selma telah membawa ke dalam ruangan bersamanya ruh surgawi yang layak menerima penghormatan tanpa aksara. Saat ia meraba keheningan itu, ia melempar senyum padaku dan berkata, "Sering kali ayahku mengulang padaku hikayat masa mudanya dan hari-hari lampau yang ia dan ayahmu ukir bersama. Jika ayahmu bertutur kepadamu dengan cara yang sama, maka perjumpaan ini bukanlah yang pertama di antara kita."</p>
+
+      <p>Pria tua itu bersukacita mendengar putrinya merangkai kata sedemikian rupa dan berkata, "Selma teramat peka perasaannya. Ia memandang segala sesuatu menembus mata sang jiwa." Kemudian ia melanjutkan percakapannya dengan penuh perhatian dan keluwesan seakan ia telah menemukan di dalam diriku sebuah sihir yang menerbangkannya di atas sayap kenangan menuju hari-hari yang telah usai.</p>
+
+      <p>Saat aku merenungkannya, memimpikan lembaran masa tuaku kelak, ia memandangku layaknya sebatang pohon tua yang menjulang luhur, yang telah teguh menghadapi badai dan terik mentari, memayungkan bayangannya pada sebatang anakan mungil yang bergetar rapuh tertiup angin fajar.</p>
+
+      <p>Namun Selma terkunci dalam bisu. Sesekali, ia memandangiku, lalu menatap lekat ayahnya seolah sedang membaca bab pembuka dan bab pamungkas dari naskah drama kehidupan. Hari meluncur lebih lekas di taman itu, dan aku dapat menyaksikan melalui bingkai jendela kecupan senja yang memudar kuning pada lekuk pegunungan Lebanon. Farris Effandi terus membentangkan kembali pengalaman-pengalamannya dan aku menyimak terbuai pesona dan menanggapinya dengan gelora yang begitu besar sehingga dukanya bersalin rupa menjadi kebahagiaan.</p>
+
+      <p>Selma duduk di tepi jendela, memandang dengan sepasang mata yang murung dan tanpa kata, sekalipun kecantikan memiliki bahasa surgawinya yang mandiri, yang lebih luhur daripada gema suara lidah dan bibir. Itu adalah bahasa yang tak lekang oleh putaran waktu, lazim bagi seluruh denyut umat manusia, sebuah telaga hening yang memikat anak-anak sungai yang bernyanyi ke kedalamannya dan membuat mereka karam dalam bisu.</p>
+
+      <p>Hanya hamparan jiwa kitalah yang mampu meresapi keindahan, atau bernapas dan tumbuh memeluknya. Ia mengaburkan nalar kita; kita tak kuasa mengejanya dengan kata-kata; ia adalah sensasi yang tak kasat oleh sepasang mata, yang menguar dari sang pengamat dan sosok yang menjadi kiblat tatapannya.</p>
+
+      <div class="pull-quote">
+        Keindahan sejati adalah seberkas sinar yang memancar dari relung maha kudus dalam jiwa, dan menerangi rupa raga, layaknya napas kehidupan yang bertolak dari rahim bumi dan menganugerahkan rona serta keharuman pada setangkai bunga.
+      </div>
+
+      <p>Keindahan sejati bersemayam dalam pertalian spiritual yang dilafalkan sebagai cinta, yang sanggup mekar di antara seorang pria dan wanita.</p>
+
+      <p>Apakah jiwaku dan jiwa Selma saling merengkuh pada hari pertemuan kita itu, dan apakah damba itu yang membuatku menobatkannya sebagai wanita paling jelita di bawah kolong langit? Atau apakah aku dimabukkan oleh buai anggur masa muda yang membuatku merajut khayal akan sesuatu yang tak pernah mewujud? Apakah pusaran masa mudaku memicingkan mata lahiriahku dan membuatku melamunkan benderang matanya, kemanisan celoteh mulutnya, dan keanggunan rupa tubuhnya? Ataukah pijar cahaya, kemanisan, dan keanggunannya yang telah mencelikkan mataku dan menyingkap padaku ekstasi serta nestapa dari cinta?</p>
+
+      <p>Sungguh pelik untuk melerai pertanyaan-pertanyaan ini, namun aku berucap sejujurnya bahwa pada jam itu aku didera oleh gejolak yang tak pernah menjamahku sebelumnya, sebuah afeksi baru yang berbaring tenang di jantung hatiku, bagai roh yang melayang menyapu permukaan air pada saat penciptaan dunia, dan dari rahim afeksi itulah lahir kebahagiaan dan penderitaanku. Demikianlah pungkas sudah jam perjumpaan pertamaku dengan Selma, dan demikianlah titah Surga melucutiku dari belenggu masa muda dan kesunyian, dan merelaiku berjalan dalam arak-arakan pawai cinta.</p>
+
+      <p>Cinta adalah kepingan kebebasan tunggal di muka bumi karena ia begitu meninggikan jiwa hingga pranata umat manusia dan fenomena alam tak berdaya menggeser haluannya.</p>
+
+      <p>Saat aku beranjak dari tempat peraduanku untuk mohon diri, Farris Effandi melangkah mendekatiku dan berkata dengan suara yang sarat makna, "Nah, anakku, karena kau telah menyingkap jalan menuju rumah ini, kau harus sering berkunjung dan merasa bahwa kau sedang berpulang ke pangkuan rumah ayahmu. Anggaplah aku sebagai ayah dan Selma sebagai saudarimu." Melafalkan demikian, ia berpaling pada Selma seolah meminta peneguhan atas titahnya. Selma menganggukkan kepalanya dengan yakin lalu menatapku layaknya seseorang yang telah bersua kembali dengan kawan lama.</p>
+
+      <p>Untaian kata yang diudarakan oleh Farris Effandi Karamy itu mendudukkanku berdampingan dengan putrinya di atas altar cinta. Kata-kata itu adalah senandung surgawi yang bermula dengan gita pemujaan dan karam dalam duka nestapa; ia menerbangkan jiwa kami ke alam cahaya dan nyala api yang menghanguskan; ia adalah piala dari mana kami mereguk kebahagiaan dan kepahitan.</p>
+
+      <p>Aku pun meninggalkan rumah itu. Pria tua itu memandu langkahku ke ambang taman, sementara hatiku berdegup bagai gemetar bibir seorang musafir yang dahaga.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB IV -->
+  <div class="chapter" id="obor">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab IV</span>
+      <h2 class="chapter-title">Obor Putih</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Bulan Nisan nyaris beranjak purna. Aku terus berkunjung ke kediaman Farris Effandi dan menjumpai Selma di taman permai itu, memandangi kejelitaannya, mengagumi kecerdasannya, dan menyimak keheningan dukanya. Kurasakan sepasang tangan tak kasatmata menarikku merapat kepadanya.</p>
+
+      <p>Setiap lawatan menganugerahiku makna baru akan kecantikannya dan pemahaman baru akan manis jiwanya, hingga ia menjelma sebuah kitab yang halaman-halamannya dapat kupahami dan puji-pujiannya sanggup kunyanyikan, namun tak akan pernah tuntas kubaca. Seorang wanita yang kepadanya Penyelenggaraan Ilahi telah mewariskan keindahan jiwa dan raga adalah sebuah kebenaran, yang pada saat bersamaan terbuka dan tersembunyi, yang hanya mampu kita pahami melalui cinta, dan hanya dapat disentuh melalui kebajikan; dan bilamana kita berupaya untuk melukiskan wanita semacam itu, ia akan menguap sirna layaknya kabut.</p>
+
+      <p>Selma Karamy memiliki keindahan ragawi dan ruhani, namun bagaimana aku sanggup melukiskannya pada mereka yang tak pernah mengenalnya? Sanggupkah seorang yang telah mati mengingat nyanyian burung bulbul, keharuman mawar, dan desah napas aliran sungai? Dapatkah seorang tawanan yang sarat dibebani belenggu mengikuti arah angin fajar? Bukankah kesunyian lebih menyakitkan daripada maut? Apakah harga diri menahanku dari menuturkan Selma dalam kata-kata yang lugas sebab aku tak mampu melukisnya dengan jujur menggunakan warna-warna yang bercahaya? Seorang perantau yang lapar di padang gurun tak akan menolak untuk menyantap roti kering jika Surga tak menghujaninya dengan manna dan burung puyuh.</p>
+
+      <p>Di balik balutan gaun sutra putihnya, Selma tampak semampai bagai seberkas sinar rembulan yang menyelinap menembus jendela. Ia melangkah dengan anggun dan berirama. Suaranya rendah dan merdu; kata-kata berjatuhan dari bibirnya laksana tetesan embun yang merosot dari kelopak-kelopak bunga kala mereka diusik oleh embusan angin.</p>
+
+      <p>Namun wajah Selma! Tiada kata yang sanggup melukiskan ekspresinya, yang pertama-tama memantulkan penderitaan batin yang pedih, lalu disusul oleh peninggian surgawi. Jelita paras Selma bukanlah keindahan yang klasik; ia bagaikan sebuah mimpi tentang wahyu yang tak dapat diukur, diikat, atau disalin oleh kuas pelukis maupun pahat pematung.</p>
+
+      <div class="pull-quote">
+        Keindahan Selma bukan terletak pada rambut keemasannya, melainkan pada kebajikan dari kesucian yang melingkupinya; bukan pada matanya yang bundar, melainkan pada cahaya yang memancar darinya...
+      </div>
+
+      <p>Bukan pada bibirnya yang merah, melainkan pada kemanisan kata-katanya; bukan pada leher gadingnya, melainkan pada tundukannya yang lembut ke depan. Tidak pula pada lekuk tubuhnya yang sempurna, melainkan pada kemuliaan jiwanya, yang menyala bak obor putih di antara bumi dan angkasa. keindahannya ibarat anugerah dari sebuah puisi. Namun para penyair adalah insan-insan yang tak bahagia, karena tak peduli seberapa tinggi jiwa mereka mengangkasa, mereka akan tetap terkurung dalam sampul air mata.</p>
+
+      <p>Selma adalah sosok yang merenung dalam ketimbang banyak cakap, dan keheningannya adalah sejenis melodi yang mengantar seseorang menuju ranah mimpi dan membuatnya menyimak degup jantungnya sendiri, serta menyaksikan rupa bayangan dari pikiran dan perasaannya berdiri di hadapannya, menatap matanya secara langsung.</p>
+
+      <p>Ia mengenakan mantel duka yang pekat di sepanjang hidupnya, yang justru melipatgandakan kecantikan ganjil dan keanggunannya, ibarat pohon yang tengah berbunga tampak lebih memesona saat dipandang melalui tabir kabut fajar.</p>
+
+      <p>Duka menautkan jiwanya dan jiwaku, seakan-akan masing-masing dari kami melihat di wajah yang lain apa yang sedang dirasakan oleh hati, dan mendengar gema dari sebuah suara yang tersembunyi. Tuhan telah menempa dua raga dalam satu, dan perpisahan tak lain hanyalah wujud dari penderitaan. Jiwa yang merana menemukan peristirahatan tatkala bersatu dengan jiwa yang serupa. Mereka menyatu dalam afeksi, sebagaimana seorang perantau yang bersorak saat melihat perantau lain di tanah tak bertuan. Hati-hati yang dipertemukan melalui perantara kesedihan tak akan sudi dipisahkan oleh kejayaan kebahagiaan. Cinta yang telah disucikan oleh air mata akan senantiasa murni dan indah hingga keabadian.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB V -->
+  <div class="chapter" id="badai">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab V</span>
+      <h2 class="chapter-title">Sang Badai</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Suatu hari Farris Effandi mengundangku untuk bersantap malam di kediamannya. Aku menerima pinangan itu, jiwaku dahaga akan roti dewata yang Surga letakkan di sepasang tangan Selma, roti spiritual yang membuat hati kita semakin lapar takala semakin banyak kita mencicipinya. Roti inilah yang direguk oleh Kais, sang penyair Arab, Dante, dan Sappho, dan yang membakar hati mereka dari kejauhan; roti yang diracik sang Dewi dengan manisnya kecupan dan pahitnya air mata.</p>
+
+      <p>Tatkala aku tiba di rumah Farris Effandi, kulihat Selma tengah duduk di sebuah bangku di taman, menyandarkan kepalanya pada sebatang pohon dan ia tampak bagai seorang pengantin dalam gaun sutra putihnya, atau bak seorang penjaga yang tengah melindungi tempat itu.</p>
+
+      <p>Dalam diam dan takzim aku melangkah mendekat dan duduk di sisinya. Aku tak kuasa menuturkan kata; maka aku berlindung pada keheningan, satu-satunya bahasa hati, namun kurasakan Selma menyimak panggilanku yang tanpa aksara dan menyaksikan bayangan jiwaku di pelupuk mataku.</p>
+
+      <p>Dalam beberapa menit, pria tua itu melangkah keluar dan menyapaku seperti biasa. Saat ia mengulurkan tangannya kepadaku, kurasakan seolah ia tengah memberkati rahasia yang mengikatku bersama putrinya. Lalu ia berkata, "Makan malam telah siap, anak-anakku; mari kita bersantap." Kami bangkit dan mengikutinya, dan sepasang mata Selma berbinar; karena sebuah sentimen baru telah disematkan pada cintanya oleh panggilan ayahnya yang menyebut kami sebagai anak-anaknya.</p>
+
+      <p>Kami duduk mengitari meja, menikmati hidangan dan menyesap anggur tua, namun jiwa kami hidup di sebuah dunia yang jauh di sana. Kami mengangankan masa depan beserta segala penderitaannya. Tiga manusia yang terpencar dalam benak, namun disatukan dalam cinta; tiga manusia lugu dengan luapan perasaan namun miskin akan pengetahuan; sebuah lakon tengah dipanggungkan oleh seorang pria tua yang memuja putrinya dan peduli pada kebahagiaannya, seorang wanita muda berusia dua puluh tahun yang menatap masa depan dengan kecemasan, dan seorang pemuda, yang bermimpi dan merana, yang belum pernah mengecap anggur kehidupan maupun cukanya, yang tengah berusaha menggapai puncak dari cinta dan pengetahuan namun tak kuasa mengangkat dirinya sendiri.</p>
+
+      <p>Kami bertiga yang duduk dalam remang senja tengah makan dan minum di kediaman yang sepi itu, di bawah penjagaan mata Surga, namun di dasar gelas kami tersembunyi kepahitan dan siksaan.</p>
+
+      <p>Tatkala kami purna bersantap, salah seorang pelayan mengabarkan kehadiran seorang pria di ambang pintu yang hendak bersua dengan Farris Effandi. "Siapakah gerangan?" tanya sang pria tua. "Utusan Uskup," jawab pelayan itu. Mengalirlah keheningan sesaat, di mana Farris Effandi menatap putrinya bagai seorang nabi yang merenungi Surga demi menebak rahasianya. Lalu ia berkata pada sang pelayan, "Persilakan pria itu masuk."</p>
+
+      <p>Saat pelayan itu beranjak, seorang pria, berbalut seragam oriental dengan kumis lebat yang melengkung di ujungnya, masuk dan memberi salam pada pria tua itu, berkata, "Yang Mulia Uskup telah mengutusku untuk menjemput Anda dengan kereta pribadinya; ia bermaksud merundingkan perkara penting bersama Anda." Gurat wajah pria tua itu meremang dan senyumnya memudar. Usai larut dalam pusaran pikiran sejenak, ia mendekat kepadaku dan berkata dengan suara bersahabat, "Kuharap aku mendapati dirimu masih di sini saat aku kembali, karena Selma akan bergembira atas kehadiranmu di tempat yang sunyi ini."</p>
+
+      <p>Berucap demikian, ia berpaling pada Selma dan, seraya tersenyum, bertanya apakah ia berkenan. Selma menganggukkan kepalanya, namun sepasang pipinya merona merah, dan dengan suara yang lebih merdu dari alunan dawai lira ia menjawab, "Aku akan melakukan yang terbaik, Ayah, untuk membuat tamu kita berbahagia."</p>
+
+      <p>Selma menatap laju kereta yang membawa ayahnya dan utusan Uskup hingga kereta itu tertelan pandangan. Lalu ia melangkah datang dan duduk berhadapan denganku di atas dipan berlapis sutra hijau. Ia tampak bagai sekuntum bakung yang menunduk ke permadani rumput hijau karena hembusan angin fajar. Adalah kehendak Surga bahwa aku harus berdua saja dengan Selma, di malam hari, di kediamannya yang elok yang dikelilingi pepohonan, di mana keheningan, cinta, keindahan, dan kebajikan bermukim bersama.</p>
+
+      <p>Kami berdua terpaku dalam hening, masing-masing menanti yang lain untuk mengurai kata, namun bahasa tutur bukanlah satu-satunya jembatan pemahaman di antara dua jiwa. Bukanlah suku kata yang meluncur dari bibir dan lidah yang mempertemukan hati-hati manusia. Ada sesuatu yang jauh lebih luhur dan lebih murni daripada apa yang dilafalkan mulut.</p>
+
+      <div class="pull-quote">
+        Keheningan menerangi jiwa-jiwa kita, membisiki hati-hati kita, dan menyatukan mereka. Keheningan memisahkan kita dari diri kita sendiri, merelai kita melayari cakrawala roh, dan membawa kita lebih dekat ke Surga...
+      </div>
+
+      <p>Ia menyadarkan kita bahwa raga tak lebih dari sekadar penjara dan bahwa dunia ini hanyalah sepetak tanah pengasingan. Selma menatapku dan matanya menyingkapkan rahasia dari hatinya. Kemudian dengan lirih ia berujar, "Mari kita melangkah ke taman dan duduk di bawah pohon, lalu menyaksikan rembulan terbit dari balik pegunungan."</p>
+
+      <p>Dengan patuh aku bangkit dari tempatku, namun aku dicekam keraguan. "Tidakkah kau pikir kita sebaiknya diam di sini hingga bulan benderang dan menerangi taman?" Dan aku menyambung, "Kegelapan menelan rupa pepohonan dan bunga-bunga. Kita tak sanggup melihat apa pun."</p>
+
+      <p>Lalu ia menjawab, "Jika pekat malam menyembunyikan pepohonan dan bunga dari sepasang mata kita, ia tak akan sanggup menyembunyikan cinta dari relung hati kita." Melafalkan kata-kata ini dengan nada yang ganjil, ia memalingkan pandangannya dan menatap ke luar jendela. Aku tetap bungkam, merenungi kata-katanya, menimbang makna sejati dari setiap suku kata. Kemudian ia memandangku seakan ia menyesali apa yang baru saja terucap darinya dan berusaha menyingkirkan kata-kata itu dari telingaku melalui pendar magis matanya. Namun tatapan itu, alih-alih membuatku melupakan rentetan katanya, justru mengulang melalui ceruk terdalam hatiku dengan lebih jernih dan berdaya kata-kata manis yang telah terukir dalam ingatan abadiku.</p>
+
+      <p>Setiap keindahan dan keagungan di atas jagat ini diciptakan oleh sebaris pemikiran atau sepercik emosi di dalam diri manusia. Segala sesuatu yang kita saksikan hari ini, maha karya cipta masa lampau, dulunya, sebelum wujud kelahirannya, hanyalah setitik gagasan di benak seorang pria atau letupan getar di hati seorang wanita. Revolusi-revolusi yang menumpahkan begitu banyak darah dan mengarahkan akal manusia pada kebebasan adalah benih pikiran dari seorang manusia yang hidup di tengah ribuan manusia lainnya. Peperangan meluluhlantakkan yang meruntuhkan kekaisaran bermula dari seonggok rencana di benak satu individu. Ajaran-ajaran luhur yang membelokkan arah arus kemanusiaan adalah gagasan dari seorang manusia yang kegeniusannya mengisolasinya dari kaumnya. Sebuah pemikiran tunggal menegakkan Piramida, merintis kejayaan Islam, dan menyulut abu pada perpustakaan di Alexandria.</p>
+
+      <p>Segelintir pemikiran akan menghampirimu di malam hari yang akan menerbangkanmu ke puncak kemuliaan atau menyeretmu ke dalam keputusasaan. Secarik pandangan dari mata seorang wanita dapat menobatkanmu sebagai pria paling bahagia di kolong langit. Sepatah kata dari bibir seorang manusia dapat menimpakanmu kekayaan atau kemelaratan.</p>
+
+      <p>Kata yang diutarakan Selma di malam itu menawanku di persimpangan masa lalu dan masa depanku, laksana sebuah perahu yang membuang jangkar di tengah samudra. Kata itu membangunkanku dari lelap masa muda dan kesunyian, dan mendirikanku di atas panggung di mana kehidupan dan maut memainkan lakon mereka.</p>
+
+      <p>Keharuman bunga-bunga berjalin kelindan dengan angin sepoi saat kami melangkah masuk ke taman dan duduk membisu di atas bangku dekat pohon melati, menyimak napas dari alam yang terlelap, sementara di atap langit biru sepasang mata surga menjadi saksi drama kami. Rembulan menyembul dari balik Gunung Sunnin dan memancarkan cahayanya menyirami pesisir, perbukitan, dan pegunungan; dan kami dapat memandang desa-desa yang membingkai lembah laksana penampakan roh yang mendadak disihir keluar dari ketiadaan. Kami dapat melihat kejelitaan Lebanon di bawah siraman sinar perak rembulan.</p>
+
+      <p>Para penyair dari Barat membayangkan Lebanon sebagai tanah legenda, yang telah terlupakan semenjak wafatnya Daud, Salomo, dan para Nabi, sebagaimana Taman Eden yang musnah seusai kejatuhan Adam dan Hawa. Bagi para pujangga Barat itu, kata "Lebanon" merupakan sebuah ekspresi puitis yang ditautkan pada sebuah gunung yang lereng-lerengnya dibasuh oleh kemenyan Pohon Aras yang Suci. Ia membangkitkan kenangan mereka akan kuil-kuil pualam dan tembaga yang berdiri kokoh tak tergoyahkan, serta sekawanan rusa yang merumput di pelataran lembah. Di malam itu aku memandang Lebanon serupa alam mimpi menembus sepasang mata seorang penyair. Maka, rupa perwajahan dari segala sesuatu bersalin seiring riak emosi, dan demikianlah kita melihat sihir dan keindahan di dalamnya, padahal sejatinya sihir dan keindahan itu terlahir dari dalam diri kita sendiri.</p>
+
+      <p>Kala sinar bulan menyepuh wajah, leher, dan lengan Selma, ia menyerupai patung gading yang dipahat oleh jemari para pemuja Isytar, sang dewi keindahan dan cinta. Seraya menatapku, ia bertanya, "Mengapa engkau membisu? Mengapa kau tak menuturkan sepenggal kisah tentang masa lalumu kepadaku?"</p>
+
+      <p>Saat aku memandangnya lekat, kebisuan itu lebur, dan kubuka bibirku serta berucap, "Tidakkah kau dengar apa yang kukatakan saat kita menginjakkan kaki di kebun ini? Jiwa yang mampu mendengar bisik bunga-bunga dan senandung kesunyian, pasti mampu pula menyimak jerit jiwaku dan deru riuh di palung hatiku."</p>
+
+      <p>Ia menyembunyikan parasnya di balik sepasang tangannya dan berkata dengan suara yang gementar, "Ya, aku mendengarmu - aku mendengar sebuah rintihan yang berembus dari dada sang malam dan deru amarah yang bergolak di jantung sang siang."</p>
+
+      <p>Mengubur masa laluku, menyangkal eksistensiku - melupakan segalanya kecuali Selma - aku menjawabnya, berkata, "Dan aku pun mendengarmu, Selma. Aku mendengar harmoni musik yang menggairahkan berdenyut di udara dan membuat seluruh semesta berguncang."</p>
+
+      <p>Mendengar baris-baris kata itu, ia memejamkan mata dan di bibirnya kulihat sebuah senyum kebahagiaan yang berpadu dengan kepedihan. Ia berbisik lirih, "Kini aku tahu bahwa ada sesuatu yang lebih menjulang dari surga dan lebih curam dari samudra, serta lebih ganjil dari sang kehidupan, maut, dan waktu. Aku tahu sekarang apa yang tak pernah kuketahui sebelumnya."</p>
+
+      <p>Pada detik itu Selma menjelma lebih berharga dari seorang kawan, lebih karib dari seorang saudari, dan lebih didamba dari seorang kekasih. Ia menetas menjadi sebuah gagasan maha luhur, sebuah emosi nan jelita yang menaklukkan dan bermukim di dalam rohku.</p>
+
+      <p>Adalah keliru untuk menafsir bahwa cinta tumbuh dari kebersamaan yang panjang dan pendekatan yang gigih. Cinta adalah buah pewaris dari pertalian spiritual dan bila kedekatan itu tak lekas tercipta dalam sekejap, maka ia tak akan pernah terwujud dalam hitungan tahun atau bahkan hitungan generasi.</p>
+
+      <p>Lalu Selma mendongakkan kepalanya dan menatap cakrawala di mana Gunung Sunnin memeluk hamparan langit, dan berujar, "Kemarin kau ibarat seorang saudara bagiku, bersamamu aku menjalani hari dan di sisimu aku duduk tenang di bawah naungan ayahku. Namun kini, kurasakan kehadiran sesuatu yang lebih ganjil dan lebih manis dari afeksi persaudaraan, sebuah jalinan tak lazim antara cinta dan ketakutan yang memenuhi dadaku dengan duka dan kebahagiaan."</p>
+
+      <p>Aku membalas, "Emosi yang kita takuti dan yang menggetarkan kita kala ia merasuk menembus relung hati kita adalah hukum alam yang memandu rembulan mengitari bumi dan mentari mengelilingi Tuhan."</p>
+
+      <p>Ia meletakkan tangannya di atas kepalaku dan menyisirkan jemarinya melalui helaian rambutku. Wajahnya merona cerah dan air mata menderas dari kelopaknya bagai rintik embun di dedaunan bakung, dan ia berkata, "Siapakah yang akan memercayai kisah kita—siapa yang akan percaya bahwa pada jam ini kita telah menundukkan rintangan keraguan? Siapa yang sudi percaya bahwa bulan Nisan yang menautkan kita untuk pertama kalinya, adalah bulan yang menghentikan kita di tempat Maha Kudus dalam kehidupan?"</p>
+
+      <p>Jemarinya masih berdiam di kepalaku tatkala ia berucap, dan aku tak akan sudi menukar mahkota raja atau karangan bunga kejayaan dengan sepasang tangan nan elok dan halus yang jemarinya terpintal di rambutku. Lalu aku meresponsnya: "Orang-orang tak akan memercayai kisah kita lantaran mereka tuna akan makna cinta—satu-satunya kembang yang tumbuh dan mekar tanpa mengemis pada musim, namun apakah sungguh Nisan yang mempertemukan kita kali pertama, dan apakah sungguh jam ini yang telah menawan kita di dalam ruang Maha Kudus sang kehidupan? Bukankah campur tangan Tuhan yang telah merapatkan jiwa kita jauh sebelum kita lahir dan menahbiskan kita sebagai tawanan satu sama lain untuk seluruh siang dan malam? Riwayat manusia tak bermula dari rahim dan tak pernah tamat di liang lahat; dan bentangan cakrawala ini, yang bertaburkan cahaya rembulan dan gemintang, tak dibiarkan sepi dari kerumunan jiwa-jiwa yang mencinta dan roh-roh yang intuitif."</p>
+
+      <p>Saat ia menarik tangannya mundur dari atas kepalaku, kurasakan sejenis sengatan getar di akar rambutku yang bersenyawa dengan semilir angin malam. Layaknya seorang pendoa murtad yang menyambut berkat dengan mengecup altar di sebuah kuil suci, kugenggam tangan Selma, kudaratkan bibirku yang membara di atasnya, dan kuhadiahkan padanya sebuah kecupan yang panjang, yang ingatannya memelelehkan hatiku dan kemanisannya sanggup membangunkan segala kebajikan di dalam jiwaku. Sejam berlalu, yang mana setiap menitnya menitis menjadi satu tahun cinta. Kesunyian malam, benderang cahaya bulan, bebungaan, dan pepohonan membuat kami melupakan segala kenyataan kecuali cinta, ketika tiba-tiba gema ringkik kuda dan derik roda kereta menyergap pendengaran. Terbangun dari pingsan yang melenakan dan terjerembap dari kahyangan mimpi ke dalam dunia kekalutan dan malapetaka, kami mendapati bahwa pria tua itu telah pulang dari perutusannya. Kami bangkit dan melangkah membelah kebun untuk menyambutnya.</p>
+
+      <p>Tatkala kereta itu merapat di gerbang taman, Farris Effandi turun dan berjalan terseret ke arah kami, tubuhnya sedikit merunduk seolah ia tengah memikul beban yang teramat berat. Ia menghampiri Selma dan meletakkan kedua tangannya di sepasang bahu putrinya, lalu menatapnya lekat. Aliran air mata menganak sungai di pipinya yang keriput dan bibirnya gemetar menyunggingkan senyum lara. Dalam suara yang tercekik, ia bertutur, "Selma kesayanganku, tak lama lagi kau akan direnggut dari pelukan ayahmu menuju pelukan pria lain. Tak lama lagi takdir akan memboyongmu dari rumah yang sunyi ini menuju benteng dunia yang teramat lapang, dan taman ini akan merindukan tekanan tapak kakimu, dan ayahmu akan menjelma sosok asing bagimu. Segalanya telah purna; semoga Tuhan memberkatimu."</p>
+
+      <p>Mendengar barisan kata itu, rona wajah Selma meremang kelabu dan matanya membeku seakan ia mengendus firasat tentang maut. Lalu ia memekik, laksana seekor burung yang tertembak jatuh, meronta, dan menggigil, dan dalam suara yang parau ia bertanya, "Apa yang kau katakan? Apa maksudmu? Ke mana kau hendak membuangku?" Lalu ia menghunjam ayahnya dengan tatapan menyelidik, berusaha membongkar rahasianya. Selang sesaat ia berucap, "Aku mengerti. Aku paham segalanya. Uskup itu telah memintaku darimu dan telah menyiapkan sebuah sangkar bagi burung bersayap patah ini. Inikah kehendakmu, Ayah?"</p>
+
+      <p>Jawabannya adalah sebuah embusan napas yang dalam. Dengan segenap kelembutan ia menuntun Selma masuk ke dalam rumah, sementara aku mematung di taman, gelombang kekalutan mengombang-ambingkanku laksana badai yang merajam daun-daun musim gugur. Lalu aku mengekor mereka masuk ke ruang tamu, dan demi menghindari rasa malu, aku menjabat tangan pria tua itu, menatap Selma, bintangku yang jelita, dan melangkah keluar dari rumah tersebut.</p>
+
+      <p>Tatkala aku mencapai batas ujung taman, sayup kudengar pria tua itu memanggil namaku dan aku pun berbalik menjumpainya. Dengan raut memelas ia meraih tanganku dan berkata, "Ampuni aku, anakku. Aku telah menghancurkan malammu dengan tumpahan air mata, tapi tolong, datanglah menemuiku kelak bilamana rumahku ditinggalkan, tatkala aku terbenam dalam sunyi dan putus asa. Masa muda, putraku tersayang, tak akan pernah bisa berpadu dengan kepikunan, layaknya pagi yang pantang bersua dengan malam; namun kau akan datang menghampiriku dan mengembalikan ke ingatanku hari-hari muda yang dulu kuhabiskan bersama ayahmu, dan kau akan mengabarkan kepadaku warta kehidupan yang tak lagi menghitungku sebagai salah satu dari putranya. Maukah kau mengunjungiku tatkala Selma telah pergi dan aku teronggok di sini dalam kesepian?"</p>
+
+      <p>Manakala ia menuturkan kata-kata penuh lara itu dan aku menjabat tangannya dalam hening, kurasakan air mata yang hangat luruh dari matanya menimpa tanganku. Menggigil digerus kesedihan dan balutan afeksi layaknya seorang putra. Kurasakan seolah hatiku mati dicekik nestapa. Saat aku mendongak dan ia melihat bulir air mata di sepasang mataku, ia mencondongkan tubuhnya kepadaku dan mengecup dahiku. "Selamat tinggal, Nak, selamat tinggal." Titik air mata dari seorang pria renta jauh lebih bertenaga daripada tangis seorang pemuda sebab ia adalah sari pati dari kehidupan yang tersisa di raganya yang kian rapuh. Air mata seorang pemuda serupa rintik embun di kelopak mawar, sementara air mata pria senja laksana helaian daun kuning yang rontok diterjang angin jelang datangnya musim dingin.</p>
+
+      <p>Tatkala aku beranjak menjauh dari kediaman Farris Effandi Karamy, seruan suara Selma masih berdengung di telingaku, kejelitaannya menguntitku layaknya roh halus, dan air mata ayahnya perlahan mengering di punggung tanganku.</p>
+
+      <p>Kepergianku bagaikan keluarnya Adam dari Firdaus, namun Hawa bagi hatiku tak menemaniku untuk menyulap seluas dunia ini menjadi Eden. Di malam itu, di mana aku telah dilahirkan kembali, kurasakan bahwa untuk kali pertama aku bertatap muka dengan wajah sang Maut. Demikianlah sang surya menghidupkan dan merenggut nyawa ladang-ladang dengan panasnya.</p>
+    </div>
+  </div>
+
+
+  <!-- PASTE KONTEN DARI FILE BAGIAN 2 DI BAWAH BARIS INI -->
+  <!-- BAB VI -->
+  <div class="chapter" id="danau">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab VI</span>
+      <h2 class="chapter-title">Telaga Api</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Segala sesuatu yang diperbuat manusia secara diam-diam dalam pekat malam akan disingkapkan dengan telanjang di bawah cahaya siang. Untaian kata yang diucap dalam sekat privasi akan berganti menjelma percakapan umum yang tak dinyana. Perbuatan yang hari ini kita kubur di sudut-sudut kediaman kita akan diteriakkan di setiap lorong jalan esok harinya.</p>
+
+      <p>Maka hantu-hantu kegelapan pun membongkar tujuan dari pertemuan antara Uskup Bulos Galib dengan Farris Effandi Karamy, dan percakapan mereka digemakan ke seantero lingkungan hingga menyusup ke gendang telingaku.</p>
+
+      <p>Perbincangan yang bergulir di antara Uskup Bulos Galib dan Farris Effandi malam itu bukanlah membicarakan penderitaan kaum fakir atau nestapa para janda dan yatim piatu. Tujuan pamungkas mengapa Farris Effandi dijemput dan diangkut dalam kereta pribadi sang Uskup adalah demi meminang Selma untuk diserahkan pada sang keponakan Uskup, Mansour Bey Galib.</p>
+
+      <p>Selma adalah putri semata wayang dari hartawan Farris Effandi, dan bidikan Uskup jatuh pada Selma, bukan berlandaskan pada parasnya yang jelita dan keluhuran jiwanya, melainkan bertumpu pada harta sang ayah yang akan menjamin Mansour Bey sebongkah takdir yang makmur dan menobatkannya sebagai seorang pembesar.</p>
+
+      <p>Para pemuka agama di Timur tak puas dengan kemewahan mereka sendiri, melainkan mereka mesti berjuang untuk menjadikan seluruh anggota keluarga mereka sebagai para penguasa dan penindas. Kemuliaan seorang pangeran diwariskan pada putra sulungnya melalui hak waris, namun peninggian seorang kepala agama menular di antara para saudara lelaki dan keponakannya. Maka uskup Nasrani, dan imam Muslim, serta pendeta Brahmana mewujud layaknya siluman laut yang menerkam mangsa mereka dengan tentakel yang berkerumun dan menyesap darahnya dengan mulut yang tak terbilang banyaknya.</p>
+
+      <p>Tatkala sang Uskup meminta tangan Selma untuk keponakannya, satu-satunya jawaban yang ia terima dari ayah gadis itu adalah keheningan yang dalam dan derai air mata, karena ia benci harus kehilangan anak tunggalnya. Jiwa pria mana pun akan bergetar saat ia harus dipisahkan dari putri satu-satunya yang telah ia besarkan menjadi seorang wanita muda. Duka orang tua pada hari pernikahan putri mereka setara dengan kebahagiaan mereka pada hari pernikahan putra mereka, karena seorang putra membawa anggota baru ke dalam keluarga, sementara seorang putri, usai menikah, akan hilang dari mereka.</p>
+
+      <p>Farris Effandi terpaksa mengabulkan permintaan sang Uskup, mematuhi kehendaknya dengan setengah hati, sebab Farris Effandi mengenal keponakan sang Uskup itu dengan amat baik, ia tahu bahwa pria itu berbahaya, penuh dengan kebencian, kejahatan, dan kebobrokan.</p>
+
+      <div class="pull-quote">
+        Di Lebanon, tak ada satupun umat Nasrani yang sanggup melawan uskupnya dan tetap bernapas lega. Tak ada manusia yang bisa menentang pemuka agamanya dan tetap mempertahankan reputasinya. Mata tak akan mampu menahan tombak tanpa tertusuk, dan tangan tak akan bisa menggenggam pedang tanpa terputus.
+      </div>
+
+      <p>Andaikata Farris Effandi melawan sang Uskup dan menolak keinginannya; maka reputasi Selma akan hancur dan namanya akan ternoda oleh kotoran dari bibir dan lidah orang-orang. Menurut pendapat sang rubah, tandan anggur tinggi yang tak bisa dijangkau pasti rasanya masam.</p>
+
+      <p>Demikianlah takdir mencengkeram Selma dan menuntunnya laksana budak yang terhina dalam arak-arakan wanita timur yang nestapa, dan demikianlah roh mulia itu terperosok ke dalam perangkap setelah terbang bebas di atas sayap-sayap putih cinta di hamparan langit penuh cahaya rembulan yang semerbak oleh aroma bunga-bunga.</p>
+
+      <p>Di beberapa negeri, kekayaan orang tua menjelma sumber penderitaan bagi anak-anaknya. Peti besi besar nan kokoh yang digunakan ayah dan ibu bersama-sama untuk mengamankan harta mereka berubah menjadi penjara yang sempit dan gelap bagi jiwa para pewarisnya. Dinar Maha Kuasa yang dipuja-puja manusia menjadi iblis yang menghukum roh dan mematikan nurani. Selma Karamy adalah satu dari mereka yang menjadi korban kekayaan orang tuanya serta keserakahan mempelai pria. Andai saja bukan karena harta ayahnya, Selma pasti masih hidup bahagia.</p>
+
+      <p>Satu minggu telah berlalu. Cinta Selma adalah satu-satunya pelipur laraku, menyanyikan kidung kebahagiaan bagiku di malam hari dan membangunkanku di kala fajar untuk menyingkap makna kehidupan dan rahasia alam. Ia adalah cinta surgawi yang suci dari cemburu, melimpah ruah dan tak pernah melukai jiwa. Ia adalah kedekatan batin mendalam yang memandikan jiwa dalam kepuasan; dahaga kasih sayang yang begitu dalam yang, bilamana terpuaskan, memenuhi jiwa dengan karunia; kelembutan yang menyemai asa tanpa mengusik jiwa, mengubah bumi menjadi firdaus dan kehidupan menjadi mimpi yang manis dan elok.</p>
+
+      <p>Di pagi hari, tatkala aku melangkah di padang, kulihat lambang Keabadian dalam kebangkitan alam, dan kala aku duduk di pesisir pantai kudengar ombak mendendangkan nyanyian Keabadian. Dan saat aku berjalan di jalanan, kusaksikan keindahan hidup dan keagungan umat manusia dalam wujud orang-orang yang lalu-lalang dan pergerakan para pekerja.</p>
+
+      <p>Hari-hari itu melintas bagai hantu dan menguap laksana awan, dan tak lama kemudian tiada yang tersisa bagiku kecuali kenangan penuh duka. Mata yang biasa kugunakan untuk menatap kecantikan musim semi dan kebangkitan alam, tak lagi sanggup melihat apa pun selain amuk badai dan kesengsaraan musim dingin. Telinga yang dulunya menyimak dengan sukacita kidung ombak, kini hanya mampu mendengar lolongan angin dan murka lautan yang menghantam tebing. Jiwa yang tadinya mengamati dengan riang gairah tak kenal lelah umat manusia dan kejayaan semesta, kini disiksa oleh kesadaran akan kekecewaan dan kegagalan. Tiada yang lebih indah ketimbang hari-hari penuh cinta itu, dan tiada yang lebih pahit daripada malam-malam duka yang mengerikan itu.</p>
+
+      <p>Manakala aku tak kuasa lagi menahan dorongan hati, aku pergi, di akhir pekan, sekali lagi ke kediaman Selma - kuil suci yang telah didirikan oleh Keindahan dan diberkati oleh Cinta, di mana roh sanggup memuja dan hati berlutut takzim melantunkan doa. Tatkala aku menjejakkan kaki di taman, kurasakan sebuah kekuatan menarikku menjauh dari dunia ini dan menempatkanku di suatu alam gaib yang terbebas dari pergulatan dan rintangan. Layaknya seorang penempuh laku mistik yang menerima wahyu Surga, kulihat diriku di tengah pepohonan dan bunga, dan saat aku mendekati ambang pintu rumah, kupandang Selma tengah duduk di atas bangku di bawah naungan bayangan pohon melati tempat kami berdua duduk sepekan yang lalu, di malam yang telah dipilih oleh Penyelenggaraan Ilahi sebagai permulaan dari kebahagiaan dan penderitaanku.</p>
+
+      <p>Ia tak bergerak maupun bersuara tatkala aku mendekatinya. Ia seakan telah mafhum secara intuitif bahwa aku akan datang, dan saat aku duduk di sisinya ia menatapku sejenak lalu menghela napas panjang, kemudian memalingkan wajahnya dan menatap langit. Dan, usai sesaat yang diresapi keheningan magis, ia berpaling kembali kepadaku dan dengan gemetar meraih tanganku serta berucap dengan suara redup, "Tataplah aku, kawanku; selamilah wajahku dan bacalah padanya apa yang ingin kau ketahui dan yang tak sanggup kulisankan. Tataplah aku, kekasihku... tataplah aku, saudaraku."</p>
+
+      <p>Aku memandangnya lekat dan kusaksikan sepasang mata itu, yang beberapa hari lalu tersenyum layaknya bibir dan bergetar bak sayap burung bulbul, kini telah mencekung dan berkaca-kaca oleh duka dan ngilu. Wajahnya, yang dulu serupa kelopak bakung yang mekar dikecup mentari, telah memudar dan kehilangan rona rupanya. Bibir manisnya layaknya dua kuntum mawar layu yang ditinggalkan musim gugur di tangkainya. Lehernya, yang dulunya laksana pilar gading, kini menunduk gontai seakan tak sanggup lagi memikul beban pilu di kepalanya.</p>
+
+      <p>Semua guratan perubahan ini kulihat di wajah Selma, namun bagiku hal itu layaknya awan berarak yang menyaput wajah rembulan dan menjadikannya kian jelita. Tatapan yang menyingkap kepedihan batin menorehkan keindahan ekstra pada sekujur wajah, tak peduli seberapa pekat tragedi dan luka yang ia isyaratkan; namun rupa wajah yang, dalam diam, tak menyuarakan misteri yang tersembunyi bukanlah wajah yang cantik, terlepas dari seberapa simetris garis wajahnya. Piala tak akan menggoda bibir kita terkecuali jika rona anggur terpancar menembus kristalnya yang bening.</p>
+
+      <p>Selma, pada malam itu, laksana piala yang berlimpah anggur surgawi yang diramu dari kepahitan dan kemanisan hidup. Tanpa disadari, ia menjelma simbol dari wanita timur yang tak pernah meninggalkan rumah orang tuanya hingga ia meletakkan kuk berat suaminya di lehernya, yang tak pernah beranjak dari dekapan ibunya yang penuh kasih hingga ia mesti hidup sebagai budak, menanggung kekerasan hati ibu suaminya.</p>
+
+      <p>Aku terus memandangi Selma dan menyimak jiwanya yang terhempas dan ikut menderita bersamanya hingga kurasakan sang waktu telah mematung dan semesta telah sirna dari eksistensi. Aku hanya mampu melihat sepasang matanya yang bundar menatapku lekat dan hanya sanggup merasakan tangannya yang dingin dan gemetar menggenggam jemariku.</p>
+
+      <p>Aku tersentak dari pingsanku mendengar Selma bersuara lirih, "Kemarilah kekasihku, mari kita bicarakan masa depan yang mengerikan ini sebelum ia tiba. Ayahku baru saja meninggalkan rumah untuk bersua dengan pria yang kelak akan menjadi pendampingku hingga maut menjemput. Ayahku, yang Tuhan pilih demi tujuan keberadaanku, akan bertemu dengan pria yang telah disematkan dunia sebagai tuanku untuk sisa hidupku. Di jantung kota ini, pria tua yang telah mendampingiku sepanjang masa mudaku akan bertemu dengan pemuda yang bakal menjadi rekanku untuk tahun-tahun yang akan datang. Malam ini kedua keluarga akan menetapkan hari pernikahan. Sungguh jam yang ganjil dan menikam! Pekan lalu di waktu yang sama, di bawah naungan pohon melati ini, Cinta merengkuh jiwaku untuk kali pertama. Sementara Takdir tengah menuliskan kata pertama dari riwayat hidupku di puri kediaman sang Uskup. Kini, di saat ayah dan pelamarku tengah merencanakan hari perkawinan, kulihat jiwamu mengepak di sekelilingku laksana burung kehausan yang menggelepar di atas mata air yang dijaga oleh ular berbisa yang lapar. Oh, betapa agung malam ini! Dan betapa pekat misterinya!"</p>
+
+      <p>Meresapi barisan kata ini, kurasakan hantu kelam dari keputusasaan total tengah mencengkeram cinta kami untuk mencekiknya dalam masa bayinya, dan aku menjawabnya, "Burung itu akan senantiasa mengepakkan sayap di atas mata air tersebut hingga dahaga membinasakannya atau ia jatuh ke dalam cengkeraman sang ular dan menjelma mangsanya."</p>
+
+      <p>Ia merespons, "Tidak, kekasihku, burung bulbul ini harus terus hidup dan bernyanyi hingga kegelapan merapat, hingga musim semi berlalu, hingga akhir dunia, dan terus bersenandung hingga keabadian. Suaranya tak boleh dibungkam, sebab ia membawa kehidupan ke dalam hatiku, sayapnya tak boleh dipatahkan, sebab kepakannya menyingkirkan mendung dari hatiku."</p>
+
+      <p>Saat aku berbisik, "Selma, kekasihku, dahaga akan menguras tenaganya, dan rasa takut akan membunuhnya."</p>
+
+      <p>Ia bergegas menimpali dengan bibir gementar, "Dahaga jiwa jauh lebih manis daripada anggur hal-hal fana, dan rasa takut roh jauh lebih berharga daripada keamanan raga. Namun dengarlah, kekasihku, dengarkanlah dengan saksama, hari ini aku berdiri di ambang pintu kehidupan baru yang sama sekali tak kuketahui. Aku laksana orang buta yang meraba-raba jalannya agar ia tidak jatuh. Kekayaan ayahku telah menempatkanku di pasar budak, dan pria ini telah membeliku. Aku tak mengenalnya dan tidak pula mencintainya, namun aku akan belajar mencintainya, dan aku akan patuh padanya, melayaninya, dan membuatnya bahagia. Akan kuberikan padanya semua yang bisa diberikan oleh seorang wanita rapuh kepada seorang pria kuat.</p>
+
+      <p>Namun kau, kekasihku, masih berada di puncak masa muda. Kau bisa berjalan bebas menyusuri jalan hidup yang lapang, yang berkarpetkan bunga-bunga. Kau bebas mengarungi dunia, menjadikan hatimu sebagai obor untuk menerangi jalanmu. Kau bisa berpikir, berbicara, dan bertindak dengan bebas; kau bisa menuliskan namamu di wajah kehidupan sebab engkau adalah seorang pria; kau bisa hidup sebagai tuan karena kekayaan ayahmu tak akan menempatkanmu di pasar budak untuk dibeli dan dijual; kau bisa menikahi wanita pilihanmu dan, sebelum ia tinggal di rumahmu, kau bisa membiarkannya menetap di hatimu dan dapat bertukar rahasia tanpa halangan."</p>
+
+      <p>Kesunyian menyelimuti sejenak, dan Selma melanjutkan, "Namun, apakah kini Kehidupan akan mencabik kita terpisah agar kau bisa mencapai kemuliaan seorang pria dan aku mengemban tugas seorang wanita? Apakah untuk ini lembah menelan nyanyian burung bulbul ke kedalamannya, dan angin mencerai-beraikan kelopak mawar, dan telapak kaki menginjak-injak cangkir angin? Apakah semua malam yang kita lalui dalam cahaya bulan di dekat pohon melati, di mana jiwa kita menyatu, semuanya sia-sia? Apakah kita terbang begitu cepat menuju bintang-bintang hingga sayap kita lelah, dan apakah kini kita sedang turun ke dalam jurang? Atau mungkinkah Cinta sedang tertidur ketika ia datang kepada kita, dan apakah ia, ketika terbangun, menjadi marah dan memutuskan untuk menghukum kita? Atau apakah roh kita mengubah angin malam menjadi badai yang mencabik-cabik kita dan meniup kita laksana debu ke dasar lembah? Kita tak melanggar satu perintah pun, tidak pula kita mencicipi buah terlarang, lantas apa yang membuat kita meninggalkan firdaus ini? Kita tak pernah merencanakan permufakatan jahat atau memicu pemberontakan, lantas mengapa kita digiring turun ke neraka? Tidak, tidak, saat-saat yang mempersatukan kita jauh lebih agung dari rentetan abad, dan cahaya yang menerangi jiwa kita jauh lebih benderang dari kegelapan; dan jika badai memisahkan kita di samudra yang ganas ini, ombak akan kembali menyatukan kita di pesisir yang tenang; dan jika kehidupan ini membunuh kita, kematian akan mempersatukan kita. Hati seorang wanita akan berubah oleh waktu atau musim; sekalipun ia mati dalam keabadian, ia tak akan pernah musnah. Hati seorang wanita laksana sebuah padang yang diubah menjadi medan tempur; setelah pepohonan dicabut hingga ke akarnya dan rerumputan hangus terbakar dan bebatuan memerah oleh darah dan bumi ditanami tulang belulang serta tengkorak, ia akan kembali tenang dan bisu seolah tak pernah terjadi apa-apa; karena musim semi dan musim gugur akan datang pada waktunya dan meneruskan tugas mereka.</p>
+
+      <p>Dan kini, kekasihku, apa yang harus kita lakukan? Bagaimana kita akan berpisah dan kapan kita akan berjumpa kembali? Akankah kita menganggap cinta sebagai tamu asing yang datang di petang hari dan beranjak pergi di pagi hari? Atau akankah kita mengandaikan afeksi ini sebagai mimpi yang hadir dalam lelap kita dan pergi tatkala kita terjaga?</p>
+
+      <p>Akankah kita menganggap pekan ini sebagai jam-jam kemabukan yang akan lekas digantikan oleh kesadaran? Angkatlah kepalamu dan biarkan aku menatapmu, kekasihku; bukalah bibirmu dan biarkan aku menyimak suaramu. Bicaralah padaku! Akankah kau mengingatku setelah badai ini menenggelamkan perahu cinta kita? Akankah kau mendengar bisik kepak sayapku di dalam kesunyian malam? Akankah kau menyimak rohku yang mengepak di atasmu? Akankah kau mendengarkan hela napasku? Akankah kau melihat bayanganku mendekat bersama pekat senja dan menguap sirna bersama rona merah fajar? Katakan padaku, kekasihku, akan menjadi apa dirimu usai kau pernah mewujud sinar magis bagi mataku, kidung manis bagi telingaku, dan sayap-sayap bagi jiwaku? Akan menjadi apa dirimu?"</p>
+
+      <p>Meresapi kata-kata itu, hatiku meleleh luluh, dan aku menjawabnya, "Aku akan menjadi seperti yang kau inginkan, kekasihku."</p>
+
+      <p>Lalu ia berkata, "Aku ingin kau mencintaiku sebagaimana seorang penyair mencintai pikiran-pikirannya yang lara. Aku ingin kau mengenangku sebagaimana seorang pengembara mengingat telaga hening yang memantulkan bayangannya kala ia mereguk airnya. Aku ingin kau mengingatku sebagaimana seorang ibu mengenang anaknya yang mati sebelum menatap cahaya, dan aku ingin kau mengenangku sebagaimana seorang raja yang welas asih mengingat seorang tawanan yang mati sebelum pengampunan tiba padanya. Aku ingin kau menjadi kawan seperjalananku, dan aku ingin kau mengunjungi ayahku serta menghiburnya di dalam kesunyiannya sebab aku akan lekas meninggalkannya dan menjelma asing baginya."</p>
+
+      <p>Aku menjawabnya, berucap, "Aku akan melakukan segala yang kau pintakan dan akan menjadikan jiwaku sampul bagi jiwamu, dan hatiku tempat bernaung bagi kecantikanmu, serta dadaku pusara bagi duka nestapamu. Aku akan mencintaimu, Selma, sebagaimana hamparan padang memuja musim semi, dan aku akan hidup di dalam dirimu dalam napas kehidupan sekuntum bunga di bawah siraman cahaya mentari. Aku akan menyanyikan namamu sebagaimana lembah melantunkan gema lonceng gereja desa; aku akan menyimak bahasa jiwamu sebagaimana tepian pantai mendengarkan riwayat sang ombak. Aku akan mengenangmu sebagaimana seorang musafir merindukan tanah tumpah darahnya yang terkasih, dan sebagaimana orang yang lapar mengingat perjamuan agung, dan sebagaimana raja yang turun takhta mengenang hari-hari kejayaannya, serta sebagaimana sang tawanan mengingat jam-jam kelegaan dan kebebasan. Aku akan mengenangmu sebagaimana penabur benih merenungi ikatan-ikatan gandum di lantai pengirikannya, dan sebagaimana gembala merindukan padang rumput hijau dan anak sungai yang manis."</p>
+
+      <p>Selma menyimak kata-kataku dengan jantung yang berdebar kencang, dan berkata, "Esok hari kebenaran akan bersalin rupa menjadi hantu dan kebangkitan akan terasa seperti mimpi. Akankah seorang kekasih sudi memeluk hantu belaka, atau akankah orang yang dahaga memuaskan hausnya dari mata air atau sebuah ilusi?"</p>
+
+      <p>Aku menjawabnya, "Esok hari, takdir akan menempatkanmu di pusaran keluarga yang damai, namun ia akan melemparkanku ke dunia yang sarat pergulatan dan peperangan. Kau akan berada di kediaman seseorang yang melalui kebetulan telah menjadikannya teramat beruntung berkat kecantikan dan kebajikanmu, sementara aku akan menjalani kehidupan yang dirundung derita dan ketakutan. Kau akan menapaki gerbang kehidupan, sementara aku akan melangkah ke gerbang kematian. Kau akan disambut dengan ramah, sementara aku akan mewujud dalam sepi, namun aku akan memahat sebuah patung cinta dan memujanya di lembah kematian. Cinta akan menjadi satu-satunya penghiburku, dan aku akan mereguk cinta bak anggur dan mengenakannya sebagai jubah. Di kala fajar, Cinta akan membangunkanku dari lelap dan menuntunku ke padang yang jauh, dan pada tengah hari ia akan membimbingku ke bawah naungan bayang pepohonan, di mana aku akan menemukan tempat bernaung bersama burung-burung dari terik matahari. Di petang hari, ia akan membuatku jeda sebelum matahari terbenam untuk mendengar kidung perpisahan alam kepada cahaya siang dan akan memperlihatkan padaku awan-awan pucat yang berlayar di angkasa. Di malam hari, Cinta akan memelukku, dan aku akan terlelap, bermimpi tentang alam surgawi di mana roh-roh para kekasih dan penyair bermukim. Di musim Semi aku akan berjalan berdampingan dengan cinta di antara bunga violet dan melati, dan mereguk sisa-sisa tetesan musim dingin di dalam cangkir bunga bakung. Di musim Panas kita akan menjadikan tumpukan jerami sebagai bantal dan rerumputan sebagai ranjang kita, dan langit biru akan menyelimuti kita saat kita menatap bintang-gemintang dan rembulan.</p>
+
+      <p>Di musim Gugur, Cinta dan aku akan pergi ke kebun anggur dan duduk di sisi alat pemeras anggur, dan menyaksikan sulur-sulur anggur dilucuti dari ornamen keemasannya, dan sekawanan burung yang bermigrasi akan mengepakkan sayap di atas kita. Di musim Dingin, kita akan duduk di sisi perapian mendaraskan hikayat-hikayat masa lampau dan babad negeri-negeri yang jauh. Di masa mudaku, Cinta akan menjadi guruku; di paruh baya, menjadi penolongku; dan di masa tua, menjadi sukacitaku. Cinta, Selma kekasihku, akan tinggal bersamaku hingga akhir hayatku, dan usai maut menjemput, tangan Tuhan akan mempersatukan kita kembali."</p>
+
+      <p>Semua barisan kata ini meluap dari ceruk terdalam hatiku serupa lidah api yang melompat mengamuk dari perapian, lalu menguap sirna menjadi abu. Selma menangis seolah sepasang matanya adalah bibir yang menjawabku dengan tumpahan air mata.</p>
+
+      <p>Mereka yang tak pernah dianugerahi sayap oleh cinta tak akan sanggup menembus awan kefanaan untuk menyaksikan alam gaib di mana jiwaku dan jiwa Selma lebur bersama dalam jam yang bahagia sekaligus nelangsa itu. Mereka yang tak dipilih oleh Cinta sebagai pengikutnya tak akan mendengar tatkala Cinta memanggil. Kisah ini bukanlah untuk mereka. Sekalipun mereka meresapi halaman-halaman ini, mereka tak akan mampu merengkuh makna bayang-bayang yang tak terbalut aksara dan tak bermukim di atas kertas; namun manusia macam apakah yang tak pernah menyesap anggur dari piala cinta, dan roh macam apakah yang tak pernah berdiri takzim di hadapan altar yang benderang di dalam kuil suci yang lantainya beralaskan hati pria dan wanita, dan yang langit-langitnya adalah kanopi rahasia dari mimpi-mimpi? Bunga apakah itu, yang kelopaknya tak pernah dikecup oleh setetes embun fajar; anak sungai macam apakah itu, yang kehilangan arah tanpa pernah bermuara ke lautan?</p>
+
+      <p>Selma menengadahkan wajahnya menatap langit dan memandangi gemintang surgawi yang bertabur di cakrawala. Ia merentangkan kedua tangannya; matanya membelalak, dan bibirnya bergetar. Di wajahnya yang pucat pasi, aku sanggup melacak jejak-jejak duka, penindasan, keputusasaan, dan ngilu. Lalu ia menjerit, "Oh, Tuhan, apa gerangan yang telah diperbuat seorang wanita hingga menyinggung kebesaran-Mu? Dosa apa yang telah ia perbuat hingga pantas merengkuh hukuman semacam ini? Atas kejahatan apa ia diganjar siksa yang abadi? Oh, Tuhan, Engkau Maha Kuat, dan aku teramat lemah. Mengapa Engkau membuatku menderita lara? Engkau Maha Agung dan Kuasa, sementara aku tak lebih dari makhluk mungil yang merayap di hadapan singgasana-Mu. Mengapa Engkau meremukkanku di bawah tapak kaki-Mu? Engkau adalah badai yang mengamuk, dan aku menyerupai debu; mengapa, Tuhanku, Engkau melemparkanku ke atas bumi yang dingin? Engkau bertabur kuasa, dan aku tak berdaya; mengapa Engkau memerangiku? Engkau penuh pertimbangan, dan aku berhati-hati; mengapa Engkau menghancurkanku? Engkau telah menciptakan wanita dengan cinta, lantas mengapa, dengan cinta pula, Engkau membinasakannya? Dengan tangan kanan-Mu Engkau meninggikannya, dan dengan tangan kiri-Mu Engkau menghempaskannya ke dalam jurang nestapa, dan ia tak mengerti mengapa. Ke dalam mulutnya Engkau tiupkan napas Kehidupan, dan di dalam hatinya Engkau semaikan benih maut. Engkau bentangkan padanya jalan kebahagiaan, namun Engkau giring ia ke jalan kenestapaan; di bibirnya Engkau letakkan senandung kebahagiaan, namun kemudian Engkau bungkam bibirnya dengan duka dan Engkau belenggu lidahnya dengan penderitaan. Dengan jemari gaib-Mu Engkau membalut luka-lukanya, dan dengan tangan-Mu Engkau melukiskan kengerian rasa sakit mengelilingi kesenangannya. Di ranjangnya Engkau sembunyikan kenikmatan dan damai, namun di sisinya Engkau bangun rintangan dan ketakutan. Engkau bangkitkan afeksinya melalui kehendak-Mu, dan dari afeksinya menguarlah rasa malu. Lewat kehendak-Mu Engkau singkapkan kepadanya keindahan ciptaan, namun cintanya pada keindahan bersalin rupa menjadi kelaparan yang mengerikan. Engkau membuatnya mereguk kehidupan di dalam piala kematian, dan kematian di dalam piala kehidupan. Engkau menyucikannya dengan air mata, dan dalam air mata pula hidupnya mengalir pergi. Oh, Tuhan, Engkau telah mencelikkan mataku dengan cinta, dan dengan cinta pula Engkau telah membutakanku. Engkau telah mengecupku dengan bibir-Mu dan memukulku dengan tangan-Mu yang perkasa. Engkau telah menanam sekuntum mawar putih di dalam hatiku, namun di sekeliling mawar itu membentang barikade duri. Engkau telah mengikat masa kiniku dengan roh seorang pemuda yang kucintai, namun menautkan hidupku dengan raga seorang pria yang tak kukenal. Maka tolonglah aku, Tuhanku, agar aku tegar dalam pergulatan yang mematikan ini dan bantulah aku agar tetap jujur dan bajik hingga maut menjemput. Jadilah kehendak-Mu. Oh, Tuhan Allahku."</p>
+
+      <p>Hening berlanjut. Selma menunduk, pucat dan rapuh; lengannya terkulai gontai, dan kepalanya merunduk dan ia tampak bagiku seakan badai baru saja mematahkan sebuah dahan dari pohonnya dan mencampakkannya ke tanah untuk mengering dan binasa.</p>
+
+      <p>Kuraih tangannya yang dingin dan mengecupnya, namun tatkala aku berusaha menghiburnya, akulah yang lebih mendamba pelipur lara dibanding dirinya. Aku membisu, merenungi nasib kami dan menyimak debar jantungku. Tak satu pun dari kami mengudarakan kata lagi.</p>
+
+      <p>Siksaan yang memuncak senantiasa bisu, maka kami pun duduk dalam hening, mematung, laksana pilar-pilar pualam yang terkubur di bawah pasir akibat gempa bumi. Tak satu pun sudi menyimak yang lain karena benang-benang hati kami telah kian rapuh dan bahkan sehelai napas sanggup memutuskannya.</p>
+
+      <p>Waktu itu tengah malam, dan kami sanggup menyaksikan bulan sabit menyembul dari balik Gunung Sunnin, dan ia tampak di tengah gemintang, laksana wajah sesosok mayat, di dalam peti mati yang dikelilingi nyala temaram lilin-lilin. Dan Lebanon tampak bak pria renta yang punggungnya melengkung dimakan usia dan matanya menjadi sarang bagi insomnia, mengawasi pekat malam dan menanti fajar, laksana seorang raja yang duduk di atas abu singgasananya di tengah puing-puing istananya.</p>
+
+      <p>Pegunungan, pepohonan, dan sungai-sungai bersalin rupa seiring perputaran waktu dan musim, sebagaimana seorang manusia berubah bersama rentetan pengalaman dan emosinya. Pohon hawar luhur yang menyerupai pengantin di siang hari, akan menjelma tiang asap di petang hari; batu karang raksasa yang berdiri kokoh tak tergoyahkan di tengah hari, akan tampak sebagai fakir miskin yang nestapa di malam hari, berbantalkan bumi dan berselimutkan langit; dan anak sungai yang kita saksikan berkilauan di pagi hari dan kita dengar mendendangkan gita Keabadian, akan, di waktu senja, berubah menjadi aliran air mata yang meratap layaknya seorang ibu yang kehilangan anaknya, dan Lebanon, yang sepekan lalu memancarkan keagungan tatkala purnama benderang dan jiwa kami bahagia, malam itu memancarkan aura sendu dan kesepian.</p>
+
+      <p>Kami bangkit dan saling mengucapkan salam perpisahan, namun cinta dan keputusasaan berdiri di antara kami serupa dua hantu, satu merentangkan sayapnya dengan jemarinya mencekik leher kami, satu menangis dan yang lain tertawa dengan ngeri.</p>
+
+      <p>Saat kuraih tangan Selma dan kukecupkan ke bibirku, ia melangkah mendekatiku dan mendaratkan ciuman di dahiku, lalu tersungkur di atas bangku kayu. Ia memejamkan mata dan berbisik lirih, "Oh, Tuhan Allah, kasihanilah aku dan sembuhkanlah sayap-sayapku yang patah!"</p>
+
+      <p>Tatkala kutinggalkan Selma di taman itu, kurasakan seolah indraku telah ditutupi tabir tebal, ibarat telaga yang permukaannya disembunyikan oleh kabut. Keindahan pepohonan, siraman cahaya rembulan, keheningan yang magis, segala yang ada di sekitarku mewujud jelek dan mengerikan. Cahaya sejati yang pernah menyingkapkan padaku keindahan dan keajaiban semesta telah diubah menjadi lidah api besar yang memanggang hatiku; dan musik Abadi yang biasa kudengar beralih menjadi kericuhan, yang lebih menakutkan dari auman singa.</p>
+
+      <p>Aku tiba di kamarku, dan layaknya burung terluka yang ditembak jatuh oleh pemburu, aku terjerembap ke atas ranjangku, merapal ulang untaian kata Selma: "Oh, Tuhan Allah, kasihanilah aku dan sembuhkanlah sayap-sayapku yang patah!"</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB VII -->
+  <div class="chapter" id="takhta">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab VII</span>
+      <h2 class="chapter-title">Di Hadapan Singgasana Kematian</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Pernikahan di masa ini adalah sebuah olok-olok yang kendalinya berada di tangan para pemuda dan orang tua. Di kebanyakan negeri para pemuda menang sementara orang tua merugi. Wanita dipandang sebagai sebuah komoditas, dibeli dan diantar dari satu rumah ke rumah lainnya. Seiring waktu kecantikannya memudar dan ia menjelma serupa perabot tua yang ditinggalkan di sudut ruangan yang gelap.</p>
+
+      <p>Peradaban modern telah membuat wanita sedikit lebih bijaksana, namun ia telah melipatgandakan penderitaannya karena ketamakan pria. Wanita di masa lampau adalah istri yang bahagia, namun wanita hari ini adalah nyonya yang sengsara. Di masa lalu ia berjalan meraba secara buta dalam cahaya, namun kini ia melangkah dengan mata terbuka di dalam pekat. Ia jelita di dalam ketidaktahuannya, bajik di dalam kesederhanaannya, dan tangguh di dalam kelemahannya. Hari ini ia menjelma buruk rupa di dalam kecerdikannya, dangkal dan nirkasih di dalam pengetahuannya. Akankah tiba harinya tatkala kecantikan dan pengetahuan, kecerdikan dan kebajikan, serta kelemahan raga dan ketangguhan roh akan berpadu dalam diri seorang wanita?</p>
+
+      <p>Aku adalah satu dari mereka yang meyakini bahwa kemajuan spiritual adalah sebuah hukum dalam kehidupan manusia, namun jalan menuju kesempurnaan itu lambat dan menyakitkan. Apabila seorang wanita meninggikan dirinya dalam satu aspek dan tertinggal di aspek lain, itu lantaran jalan terjal yang mendaki ke puncak gunung tak luput dari intaian pencuri dan sarang serigala.</p>
+
+      <p>Generasi ganjil ini eksis di antara lelap dan jaga. Ia menggenggam di tangannya tanah masa lalu dan benih-benih masa depan. Kendati demikian, di setiap kota kita mendapati seorang wanita yang menyimbolkan masa depan.</p>
+
+      <p>Di kota Beirut, Selma Karamy adalah simbol dari wanita Timur masa depan, namun, layaknya banyak insan yang mendahului zamannya, ia menjadi tumbal bagi masa kini; dan ibarat sekuntum bunga yang direnggut dari tangkainya dan dihanyutkan oleh arus sungai, ia berjalan dalam pawai duka orang-orang yang kalah.</p>
+
+      <p>Mansour Bey Galib dan Selma telah menikah, dan menetap bersama di sebuah rumah yang megah di Ras Beyrouth, di mana seluruh pembesar kaya raya bermukim. Farris Effandi Karamy ditinggalkan di rumahnya yang sunyi di tengah-tengah taman dan kebunnya ibarat gembala yang kesepian di pusaran kawanannya.</p>
+
+      <p>Hari-hari dan malam-malam perayaan pernikahan yang meriah telah berlalu, namun bulan madu itu menyisakan kenangan akan masa duka yang pahit, sebagaimana peperangan mewariskan tengkorak dan tulang belulang mati di medan laga. Keagungan sebuah pernikahan Timur mengilhami hati para pemuda dan pemudi, namun pelepasannya dapat menenggelamkan mereka layaknya batu kilangan ke dasar lautan. Eksilarasi mereka laksana jejak kaki di atas pasir yang hanya bertahan hingga debur ombak menyapunya bersih.</p>
+
+      <p>Musim semi pun beranjak, begitu pula musim panas dan gugur, namun cintaku pada Selma kian bertumbuh dari hari ke hari hingga ia bersalin rupa menjadi semacam pemujaan yang bisu, sebuah afeksi yang dimiliki seorang yatim piatu terhadap roh ibunya di Surga. Kerinduanku diubah menjadi duka buta yang tak sanggup melihat apa pun selain dirinya sendiri, dan gairah yang mengalirkan air mata dari pelupukku digantikan oleh kekalutan yang menyesap darah dari hatiku, dan desahan afeksiku menjelma untaian doa yang tak putus-putusnya demi kebahagiaan Selma dan suaminya serta kedamaian bagi ayahnya.</p>
+
+      <p>Harapan dan doaku berakhir sia-sia, karena kemalangan Selma adalah penyakit batin yang hanya maut yang sanggup menyembuhkannya.</p>
+
+      <p>Mansour Bey adalah seorang pria yang dihampiri segala kemewahan hidup dengan amat mudah; namun, terlepas dari itu semua, ia selalu tak puas dan serakah. Usai menikahi Selma, ia menelantarkan ayahnya di dalam kesepian dan mendoakan kematiannya agar ia bisa mewarisi sisa kekayaan pria tua itu.</p>
+
+      <p>Karakter Mansour Bey amat serupa dengan pamannya; satu-satunya pembeda di antara keduanya adalah bahwa sang Uskup meraih segala yang ia inginkan secara sembunyi-sembunyi, bernaung di perlindungan jubah kegerejaannya dan salib emas yang ia kenakan di dadanya, sementara sang keponakan melakukan segalanya di tempat terang. Sang Uskup pergi ke gereja di pagi hari dan menghabiskan sisa harinya dengan memeras dari para janda, yatim piatu, dan orang-orang yang berpikiran sederhana. Namun Mansour Bey menghabiskan hari-harinya dalam pengejaran kepuasan seksual. Pada hari Minggu, Uskup Bulos Galib mengkhotbahkan Injilnya; tetapi sepanjang hari kerja ia tak pernah mempraktikkan apa yang ia khotbahkan, menyibukkan diri dengan intrik-intrik politik di daerah itu. Dan, melalui sarana prestise dan pengaruh pamannya, Mansour Bey menjadikan urusannya untuk mengamankan posisi-posisi politik bagi mereka yang sanggup menawarkan uang suap yang memadai.</p>
+
+      <p>Uskup Bulos adalah seorang pencuri yang menyembunyikan dirinya di balik selimut malam, sementara keponakannya, Mansour Bey, adalah seorang penipu yang berjalan pongah di siang hari. Kendati demikian, rakyat dari bangsa-bangsa Timur menaruh kepercayaan pada mereka—para serigala dan jagal yang menghancurkan negeri mereka lewat ketamakan dan meremukkan tetangga mereka dengan tangan besi.</p>
+
+      <p>Mengapa aku mengisi lembaran-lembaran ini dengan barisan kata tentang para pengkhianat bangsa-bangsa yang malang ketimbang menyisihkan seluruh ruang demi kisah seorang wanita nestapa dengan hati yang patah? Mengapa aku menumpahkan air mata bagi orang-orang yang tertindas ketimbang menyimpan seluruh air mataku untuk mengenang seorang wanita rapuh yang nyawanya direnggut oleh taring kematian?</p>
+
+      <p>Namun para pembacaku yang budiman, tidakkah kalian berpikir bahwa wanita semacam itu ibarat sebuah bangsa yang ditindas oleh para pendeta dan penguasanya? Tidakkah kalian percaya bahwa cinta yang dihalangi yang menggiring seorang wanita ke liang kubur menyerupai keputusasaan yang merasuki penduduk bumi? Seorang wanita bagi suatu bangsa adalah laksana cahaya bagi sebuah lampu. Tidakkah cahaya itu akan meredup manakala minyak di dalam lampu mulai mengering?</p>
+
+      <p>Musim gugur telah berlalu, dan angin meniup jatuh daun-daun kuning dari pepohonan, melapangkan jalan bagi musim dingin, yang datang dengan lolongan dan jerit tangis. Aku masih berada di Kota Beirut tanpa seorang pendamping kecuali mimpi-mimpiku, yang akan mengangkat rohku ke angkasa lalu menguburnya dalam-dalam di ceruk bumi.</p>
+
+      <p>Roh yang merana menemukan relaksasi di dalam kesunyian. Ia membenci keramaian manusia, laksana rusa terluka yang menelantarkan kawanannya dan berdiam di sebuah gua hingga lukanya sembuh atau ia binasa.</p>
+
+      <p>Suatu hari kudengar kabar Farris Effandi jatuh sakit. Kutinggalkan kediamanku yang sepi dan berjalan ke rumahnya, menempuh rute baru, sebuah jalan sunyi di antara pepohonan zaitun, menghindari jalan utama dengan derik roda-roda keretanya.</p>
+
+      <p>Tiba di rumah pria tua itu, aku melangkah masuk dan mendapati Farris Effandi terbaring di ranjangnya, lemah dan pucat pasi. Sepasang matanya mencekung dan tampak laksana dua lembah gelap yang dalam, yang dihantui oleh hantu-hantu rasa sakit. Senyum yang dahulu selalu menghidupkan rupa wajahnya kini tercekik oleh kepedihan dan sakratulmaut; dan tulang-tulang jemari tangannya yang lembut menyerupai dahan-dahan telanjang yang menggigil diterpa badai. Tatkala aku menghampirinya dan menanyakan perihal kesehatannya, ia memalingkan wajah pucatnya ke arahku, dan di bibirnya yang gemetar terbit seulas senyum, dan ia berujar dalam suara yang parau, "Pergilah anakku, ke ruangan sebelah dan hiburlah Selma serta bawalah ia untuk duduk di sisi ranjangku."</p>
+
+      <p>Aku melangkah masuk ke ruangan yang berdampingan dan mendapati Selma tengah terbaring di atas dipan, menutupi kepalanya dengan kedua lengannya dan membenamkan wajahnya di bantal agar ayahnya tak mendengar isak tangisnya. Melangkah mendekat perlahan, kulafalkan namanya dalam suara yang lebih menyerupai helaan napas ketimbang bisikan. Ia bergerak penuh ketakutan, seolah ia baru saja dibangunkan dari mimpi buruk yang mengerikan, dan duduk bangkit, menatapku dengan mata yang membeku, meragukan apakah aku sesosok hantu atau makhluk yang bernyawa.</p>
+
+      <p>Usai keheningan yang dalam yang membawa kami kembali di atas sayap kenangan menuju jam tatkala kami dimabukkan oleh anggur cinta, Selma menyeka air matanya dan berkata, "Lihatlah betapa waktu telah mengubah kita! Lihatlah bagaimana sang waktu telah membelokkan arus kehidupan kita dan meninggalkan kita di tengah puing-puing ini. Di tempat ini musim semi menyatukan kita dalam ikatan cinta, dan di tempat ini pula ia telah mempertemukan kita di hadapan singgasana kematian. Betapa jelitanya musim semi itu, dan betapa mengerikannya musim dingin ini!"</p>
+
+      <p>Mengudarakan kata-kata itu, ia kembali menutupi wajahnya di balik sepasang tangannya seolah ia sedang menamengi matanya dari hantu masa lalu yang berdiri di hadapannya. Kuletakkan tanganku di atas kepalanya dan berucap, "Kemarilah, Selma, kemarilah dan biarlah kita menjelma menara-menara teguh di hadapan amuk badai. Biarlah kita berdiri laksana serdadu-serdadu gagah berani di hadapan musuh dan menantang senjatanya. Bila kita terbunuh, kita akan mati sebagai syuhada; dan jika kita menang, kita akan hidup sebagai pahlawan. Menantang rintangan dan kesukaran jauh lebih luhur ketimbang mundur menuju ketenangan. Kupu-kupu yang mengepakkan sayap mengitari lampu hingga ia mati jauh lebih mengagumkan daripada tikus mondok yang hidup di terowongan gelap. Kemarilah, Selma, mari kita susuri jalan terjal ini dengan langkah pasti, dengan mata menatap lekat mentari agar kita tak usah melihat tengkorak-tengkorak dan ular-ular berbisa di antara bebatuan dan onak duri. Jika ketakutan menghentikan kita di tengah jalan, kita hanya akan mendengar cemooh dari suara-suara malam, namun bila kita menggapai puncak gunung dengan berani, kita akan bergabung dengan roh-roh surgawi dalam kidung kemenangan dan sukacita. Tabahlah, Selma, hapus air matamu dan singkirkan duka dari wajahmu. Bangkitlah, dan mari kita duduk di sisi ranjang ayahmu, karena napas hidupnya bergantung pada hidupmu, dan senyummu adalah satu-satunya pelipur laranya."</p>
+
+      <p>Dengan penuh kasih dan kelembutan ia menatapku dan berkata, "Apakah kau memintaku untuk bersabar, sementara kau sendiri teramat membutuhkannya? Akankah seorang yang lapar menyerahkan rotinya kepada orang lapar lainnya? Atau akankah orang sakit memberikan obat kepada orang lain sementara ia sendiri sangat membutuhkannya?"</p>
+
+      <p>Ia bangkit, kepalanya tertunduk merunduk, dan kami pun berjalan ke kamar pria tua itu lalu duduk di sisi ranjangnya. Selma memaksakan sebuah senyum dan berpura-pura tegar, dan ayahnya berusaha membuatnya percaya bahwa ia merasa lebih baik dan kian menguat; namun baik ayah maupun sang putri sangat menyadari akan kepedihan satu sama lain dan menyimak hela napas yang tak tersuarakan. Mereka ibarat dua daya yang sepadan, yang saling mengikis satu sama lain dalam diam. Hati sang ayah meleleh hancur oleh karena nestapa putrinya. Mereka adalah dua roh yang murni, satu bersiap undur diri dan yang lainnya disiksa oleh duka, saling merengkuh dalam cinta dan maut; dan aku berada di pusaran keduanya dengan hatiku sendiri yang bergejolak. Kami adalah tiga insan, dihimpun dan diremukkan oleh tangan-tangan takdir; seorang pria tua yang menyerupai rumah yang diluluhlantakkan banjir, seorang wanita muda yang simbolnya adalah sekuntum bunga bakung yang dipenggal oleh tajamnya sabit, dan seorang pemuda yang tak lebih dari tunas rapuh, merunduk ditindih curah salju; dan kami semua hanyalah mainan di tangan nasib.</p>
+
+      <p>Farris Effandi bergerak perlahan dan mengulurkan tangannya yang lemah ke arah Selma, dan dalam suara yang penuh kasih dan kelembutan berujar, "Genggamlah tanganku, kekasihku." Selma menggenggam tangannya; lalu ia berkata, "Aku telah hidup cukup lama, dan aku telah mengecap manisnya buah-buah dari musim-musim kehidupan. Aku telah menyelami segala fasenya dengan hati yang lapang. Aku kehilangan ibumu tatkala usiamu baru menginjak tiga tahun, dan ia meninggalkanmu sebagai harta karun paling berharga di pangkuanku. Aku menyaksikanmu tumbuh besar, dan wajahmu memantulkan gurat rupa ibumu laksana bintang-gemintang yang berkaca pada telaga hening. Karakter, kecerdasan, dan kejelitaanmu adalah milik ibumu, bahkan caramu bertutur dan gerak-gerikmu. Kau telah menjadi satu-satunya pelipur laraku di kehidupan ini sebab kau adalah bayangan ibumu dalam setiap tindak dan kata. Kini, aku kian menua, dan satu-satunya tempat peristirahatanku hanyalah di antara sayap-sayap maut yang lembut. Tegarlah, putriku tersayang, karena aku telah hidup cukup lama untuk menyaksikanmu mekar menjadi seorang wanita. Berbahagialah, karena aku akan hidup di dalam dirimu setelah kematianku. Kepergianku hari ini tak ada bedanya dengan kepergianku esok atau lusa, karena hari-hari kita berguguran laksana dedaunan musim gugur. Jam kematianku mendekat dengan lekas, dan jiwaku begitu mendamba untuk bersatu kembali dengan jiwa ibumu."</p>
+
+      <p>Tatkala ia mengudarakan kata-kata itu dengan manis dan penuh cinta, wajahnya memancarkan cahaya pendaran. Lalu ia menyelusupkan tangannya ke bawah bantal dan menarik keluar sebuah potret kecil dalam bingkai keemasan. Dengan mata menatap lekat pada potret mungil itu, ia berucap, "Kemarilah, Selma, kemari dan tataplah ibumu di dalam gambar ini."</p>
+
+      <p>Selma menyeka air matanya, dan usai memandangi potret itu lama-lama, ia mengecupnya berulang kali dan menjerit tangis, "Oh, ibuku yang terkasih! Oh, ibu!" Lalu ia mendaratkan bibirnya yang gemetar di atas potret itu seakan ia hendak menuangkan segenap jiwanya ke dalam gambar tersebut.</p>
+
+      <p>Kata paling jelita di bibir umat manusia adalah kata "Ibu," dan panggilan paling merdu adalah panggilan "Ibuku." Ia adalah kata yang sarat akan harapan dan cinta, sebuah kata yang manis dan lembut yang meluncur dari ceruk terdalam hati. Ibu adalah segalanya—ia adalah pelipur lara kita di kala duka, harapan kita di tengah nestapa, dan ketangguhan kita di saat lemah. Ia adalah sumber dari cinta, belas kasih, simpati, dan pengampunan. Barang siapa kehilangan ibunya, ia kehilangan roh suci yang senantiasa memberkati dan menjaganya tanpa putus.</p>
+
+      <p>Segala hal di alam semesta bersaksi tentang ibu. Mentari adalah ibu bagi bumi dan memberinya nutrisi berupa kehangatan; ia tak pernah meninggalkan jagat raya di malam hari hingga ia membuai bumi dalam lelap dengan kidung lautan dan senandung burung serta anak sungai. Dan bumi ini adalah ibu bagi pepohonan dan bunga-bunga. Ia melahirkan mereka, menyusui mereka, dan menyapih mereka. Pepohonan dan bebungaan kelak menjadi ibu-ibu yang welas asih bagi buah dan benih mereka yang agung. Dan sang ibu, purwarupa dari segala wujud eksistensi, adalah roh abadi, yang sarat akan keindahan dan cinta.</p>
+
+      <p>Selma Karamy tak pernah mengenal ibunya karena ia telah wafat kala Selma masih teramat belia, namun Selma meratap saat menatap potret itu dan menjerit tangis, "Oh, ibu!" Kata ibu tersembunyi di dalam palung hati kita, dan ia meluncur ke bibir kita pada jam-jam duka dan suka cita sebagaimana keharuman menguar dari jantung mawar dan berpadu dengan udara yang cerah maupun mendung. Selma menatap lekat potret ibunya, mengecupnya berkali-kali, hingga ia tersungkur di sisi ranjang ayahnya.</p>
+
+      <p>Pria tua itu meletakkan kedua tangannya di atas kepala Selma dan berkata, "Aku telah memperlihatkan kepadamu, anakku sayang, potret ibumu di atas selembar kertas. Kini dengarkanlah aku dan aku akan membiarkanmu menyimak untaian katanya." Ia mendongakkan kepalanya laksana burung mungil di dalam sarang yang mendengar kepak sayap ibunya, dan menatapnya penuh perhatian.</p>
+
+      <p>Farris Effandi membuka bibirnya dan berujar, "Ibumu tengah menyusuimu tatkala ia kehilangan ayahnya; ia meratap dan menangis atas kepergiannya, namun ia begitu bijak dan tabah. Ia duduk di sisiku di kamar ini segera usai pemakaman itu berlalu dan menggenggam tanganku seraya berkata, 'Farris, ayahku telah tiada kini dan kau adalah satu-satunya pelipur laraku di jagat ini. Afeksi hati terbagi-bagi laksana dahan-dahan pohon aras; bilamana pohon itu kehilangan satu dahan yang kuat, ia akan menderita namun tak lantas mati. Ia akan menuangkan seluruh daya hidupnya pada dahan berikutnya agar ia tumbuh dan mengisi ruang yang hampa.' Inilah yang ibumu katakan padaku tatkala ayahnya mangkat, dan kau pun harus mengucapkan hal yang sama kala maut merengkuh ragaku menuju tempat peristirahatannya dan membawa jiwaku ke dalam pelukan Tuhan."</p>
+
+      <p>Selma menjawabnya dengan derai air mata dan hati yang hancur, "Kala Ibu kehilangan ayahnya, kau menggantikan tempatnya; namun siapa yang akan menggantikan tempatmu saat kau pergi? Ia ditinggalkan dalam lindungan seorang suami yang penuh kasih dan setia; ia menemukan pelipur lara dalam diri putri mungilnya, dan siapa yang akan menjadi penghiburku tatkala kau berpulang? Kau telah menjadi ayah dan ibuku sekaligus kawan di masa mudaku."</p>
+
+      <p>Melafalkan kata-kata ini, ia berpaling dan menatapku, dan, seraya menggenggam tepian jubahku, berucap, "Inilah satu-satunya kawan yang kumiliki setelah kepergianmu, namun bagaimana ia bisa menghiburku tatkala ia pun turut menderita? Bagaimana mungkin hati yang remuk redam menemukan kelegaan pada jiwa yang kecewa? Seorang wanita nestapa tak sanggup dihibur oleh duka tetangganya, sebagaimana burung tak kuasa terbang dengan sayap-sayap yang patah. Ia adalah karib jiwaku, namun aku telah memikulkan beban duka yang teramat berat di pundaknya dan merabunkan matanya dengan air mataku hingga ia tak mampu melihat apa pun selain kegelapan. Ia adalah seorang saudara yang teramat kucintai, namun ia laksana semua saudara yang menanggung dukaku dan membantuku meneteskan air mata yang justru melipatgandakan kepahitanku dan membakar hatiku."</p>
+
+      <p>Kata-kata Selma menikam relung hatiku, dan kurasakan aku tak sanggup lagi memikul kepedihan yang lebih dalam. Pria tua itu menyimaknya dengan jiwa yang karam, menggigil layaknya pendar cahaya lampu yang diterjang angin kencang. Lalu ia mengulurkan tangannya dan berkata, "Biarkanlah aku pergi dengan tenang, anakku. Aku telah mematahkan jeruji sangkar ini; biarkan aku terbang bebas dan jangan kau tahan diriku, karena ibumu memanggilku. Langit begitu cerah dan laut teramat tenang dan perahu telah siap berlayar; jangan kau tunda perjalanannya. Biarkan ragaku beristirahat bersama mereka yang terlelap; biarkan mimpiku berakhir dan jiwaku terbangun menyambut fajar; biarkan jiwamu memeluk jiwaku dan memberiku kecupan asa; jangan biarkan setetes pun duka atau kepahitan jatuh membasahi ragaku agar bunga dan rerumputan tak menolak nutrisinya. Jangan kau tumpahkan air mata kenestapaan di atas tanganku, karena ia mungkin menumbuhkan duri di atas pusaraku. Jangan kau pahatkan gurat-gurat sakratulmaut di dahiku, karena angin yang lalu mungkin akan membacanya dan menolak membawa debu tulang-belulangku ke padang rumput yang hijau... Aku mencintaimu, anakku, selagi aku bernapas, dan aku akan tetap mencintaimu saat aku telah tiada, dan jiwaku akan senantiasa mengawasimu dan melindungimu."</p>
+
+      <p>Ketika Farris Effandi menatapku dengan mata setengah terpejam dan berkata, "Anakku, jadilah saudara sejati bagi Selma sebagaimana ayahmu bagiku. Jadilah penolong dan kawannya di kala gundah, dan jangan biarkan ia berkabung, karena meratapi mereka yang telah mati adalah sebuah kekeliruan. Daraskan padanya dongeng-dongeng yang manis dan nyanyikan untuknya kidung kehidupan agar ia melupakan duka nestapanya. Sampaikan salamku pada ayahmu; mintalah ia menuturkan kisah-kisah masa mudamu dan katakan padanya bahwa aku mencintainya di dalam perwujudan putranya di jam-jam terakhir kehidupanku."</p>
+
+      <p>Keheningan merajai mutlak, dan aku dapat menyaksikan pucat pasi maut mulai merayap di wajah sang pria tua. Lalu ia memutar matanya dan menatap kami seraya berbisik, "Jangan panggil tabib, karena ia mungkin memperpanjang masa hukumanku di penjara ini melalui obat-obatannya. Hari-hari perbudakan telah purna, dan jiwaku mendamba kebebasan di bentangan langit. Dan jangan panggil pendeta ke sisi ranjangku, karena rapalannya tak akan menyelamatkanku jika aku adalah seorang pendosa, tak pula akan menderaskanku menuju Surga jika aku tak berdosa. Kehendak umat manusia tak sanggup membengkokkan kehendak Tuhan, layaknya ahli nujum tak kuasa mengubah lintasan gemintang. Namun setelah kematianku kelak, biarkan para tabib dan pendeta melakukan apa yang mereka sukai, karena perahuku akan terus berlayar hingga ia mencapai pelabuhannya."</p>
+
+      <p>Di pertengahan malam Farris Effandi membuka sepasang matanya yang lelah untuk terakhir kalinya dan memusatkannya pada Selma, yang tengah berlutut takzim di sisi ranjangnya. Ia berusaha menuturkan kata, namun tak kuasa, karena maut telah mencekik suaranya; namun akhirnya ia berhasil melafalkan, "Malam telah berlalu... Oh, Selma... Oh... Oh, Selma..." Kemudian ia menundukkan kepalanya, wajahnya memutih pasi, dan aku dapat melihat seulas senyum di bibirnya saat ia menghembuskan napas terakhirnya.</p>
+
+      <p>Selma meraba tangan ayahnya. Terasa dingin membeku. Lalu ia mendongak dan menatap lekat wajahnya. Wajah itu telah diselimuti cadar kematian. Selma begitu tercekik ngeri hingga ia tak kuasa meneteskan air mata, tidak pula mendesah, atau bahkan sekadar bergerak. Sejenak ia menatapnya dengan mata membeku layaknya sepasang mata patung; lalu ia menunduk hingga dahinya mencium lantai, dan berkata, "Oh, Tuhan, kasihanilah dan sembuhkanlah sayap-sayap kami yang patah."</p>
+
+      <div class="pull-quote">
+        Air mata seorang pemuda serupa rintik embun di kelopak mawar, sementara air mata pria senja laksana helaian daun kuning yang rontok diterjang angin jelang datangnya musim dingin.
+      </div>
+
+      <p>Farris Effandi Karamy berpulang; jiwanya direnggut oleh Keabadian, dan raganya diserahkan kembali pada pelukan bumi. Mansour Bey Galib merampas kuasa atas kekayaannya, dan Selma menjelma tawanan kehidupan—kehidupan yang merintih duka dan nestapa.</p>
+
+      <p>Aku karam dalam kesedihan dan pusaran lamunan. Siang dan malam memangsaku sebagaimana elang buas mencabik-cabik korbannya. Kerap kali aku mencoba menenggelamkan kemalanganku dengan menyibukkan diri pada kitab-kitab dan naskah kuno generasi lampau, namun itu ibarat memadamkan api dengan siraman minyak, karena aku tak sanggup melihat apa pun dalam arak-arakan masa lalu selain tragedi lara dan tak mampu menyimak apa pun selain ratap dan tangis. Kitab Ayub terasa lebih memukau bagiku ketimbang Mazmur dan aku lebih meresapi Ratapan Yeremia dibandingkan Kidung Agung Salomo. Hamlet menyentuh hatiku lebih dalam dibandingkan seluruh naskah drama gubahan para penulis Barat lainnya. Demikianlah keputusasaan merabunkan penglihatan kita dan menyumbat pendengaran kita. Kita tak mampu memandang apa pun selain hantu-hantu malapetaka dan hanya sanggup menyimak gema debar jantung kita yang bergemuruh kalut.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB VIII -->
+  <div class="chapter" id="kristus">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab VIII</span>
+      <h2 class="chapter-title">Di Antara Kristus dan Isytar</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Di tengah-tengah taman dan perbukitan yang menjembatani kota Beirut dengan Lebanon, bersemayam sebuah kuil mungil, teramat kuno, dipahat dari batu karang putih, yang dipeluk oleh pepohonan zaitun, badam, dan dedalu. Kendati kuil ini terpaut setengah mil dari jalan raya utama, pada masa kisahku ini bergulir hanya segelintir musafir yang terpikat pada relik dan reruntuhan usang yang pernah menjamahnya. Kuil itu adalah satu dari sekian banyak sudut memesona yang tersembunyi dan terabaikan di bentangan Lebanon. Oleh karena keterasingannya, ia mewujud surga peristirahatan bagi para pendoa dan tempat suci bagi para kekasih yang dirajam sepi.</p>
+
+      <p>Tatkala seseorang menjejak masuk ke dalam kuil ini, ia akan menyaksikan di dinding sisi timur sebuah lukisan usang bangsa Fenisia, dipahat di atas batu karang, melukiskan Isytar, dewi cinta dan kejelitaan, duduk anggun di singgasananya, dikelilingi tujuh perawan tak berbusana yang berdiri dalam ragam pose. Perawan pertama menggenggam sebuah obor; yang kedua, memetik kecapi; yang ketiga, mengayun pedupaan; yang keempat sebotol piala anggur; yang kelima, merengkuh setangkai mawar; yang keenam, untaian daun dafnah; yang ketujuh, memanggul busur dan anak panah; dan kesemuanya menatap Isytar dengan penuh ketakziman.</p>
+
+      <p>Di dinding yang berseberangan terdapat lukisan lain, lebih bernapaskan masa kini dibanding yang pertama, menyimbolkan Kristus yang dipaku di kayu salib, dan di sisi-Nya berdiri sang bunda yang didera duka serta Maria Magdalena bersama dua wanita lain yang tengah meratap. Lukisan Romawi Timur ini membisikkan bahwa ia dilahirkan dari pahatan pada abad kelima belas atau keenam belas.</p>
+
+      <p>Di dinding sisi barat menganga dua celah bundar di mana pendar cahaya matahari menyusup mencumbui kuil dan menghantam lukisan-lukisan itu serta menyepuhnya seolah mereka dilukis dengan usapan cat air keemasan. Di jantung kuil tertanam pualam bujur sangkar dengan lukisan usang di sisi-sisinya, yang beberapa di antaranya nyaris memudar ditelan gumpalan darah membatu yang menjadi saksi bisu bahwa bangsa purba pernah mempersembahkan kurban di atas batu ini dan mengguyurkan wewangian, anggur, dan minyak ke atasnya.</p>
+
+      <p>Tiada apa pun di dalam kuil mungil itu kecuali keheningan yang syahdu, menyingkapkan kepada jiwa-jiwa yang hidup rahasia-rahasia sang dewi dan bertutur tanpa aksara perihal generasi masa lampau serta jejak evolusi peribadatan. Pemandangan semacam itu menerbangkan sang penyair ke alam yang jauh di luar jangkauan raganya dan meyakinkan sang filsuf bahwa manusia dilahirkan dengan benih keimanan; mereka merasa dahaga akan sesuatu yang tak tertangkap oleh mata dan melukiskan simbol-simbol, yang maknanya membongkar rahasia-rahasia gaib dan hasrat mereka yang berdegup di antara kehidupan dan kematian.</p>
+
+      <p>Di kuil rahasia itu, aku bersua Selma sebulan sekali dan menghanyutkan jam-jam bersamanya, merenungi lukisan-lukisan ganjil itu, memikirkan Kristus yang disalibkan dan membayangkan para pemuda dan pemudi Fenisia yang pernah hidup, merajut asmara, dan memuja kecantikan di dalam perwujudan Isytar dengan membakar kemenyan di hadapan patungnya dan menuangkan minyak wangi di atas altar sucinya, orang-orang yang kini lenyap tak berbekas meminjamkan apa pun kecuali nama, yang diulang-ulang oleh derap waktu di hadapan paras Keabadian.</p>
+
+      <p>Teramat pelik untuk menenun ke dalam kata-kata ingatan akan jam-jam tatkala aku berjumpa Selma—jam-jam surgawi itu, yang meluap oleh lara, kebahagiaan, duka, asa, dan kemelaratan jiwa. Kami bertatap muka dalam sembunyi di kuil renta itu, mengenang hari-hari yang usai, merundingkan hari ini, menggigil menatap esok, dan perlahan-lahan menggali rahasia-rahasia yang tertidur di palung terdalam hati kami dan saling melarung kesengsaraan serta penderitaan, berusaha menenangkan pusaran jiwa kami dengan asa-asa semu dan mimpi-mimpi yang berurai air mata. Sesekali kami melangkah ke dalam ketenangan dan menyeka air mata kami serta merangkai senyum, mengubur segalanya kecuali Cinta; kami saling memeluk erat hingga hati kami mencair hancur; lalu Selma akan membubuhkan ciuman murni di dahiku dan menjejalkan relungku dengan ekstasi surgawi; aku membalas kecupannya tatkala ia menundukkan leher gadingnya sementara rona pipinya merona merah dengan lembut layaknya ciuman pertama fajar di kening perbukitan. Dalam bisu kami merenungi ufuk kejauhan di mana gumpalan awan diwarnai oleh sapuan cahaya jingga matahari terbenam.</p>
+
+      <p>Untaian percakapan kami tak selamanya terkungkung pada asmara; sesekali kami hanyut dalam ombak perbincangan hari itu dan saling bertukar gagasan. Di sela-sela perbincangan, Selma menuturkan perihal singgasana wanita dalam kerumunan masyarakat, jejak luka yang ditinggalkan generasi lampau pada karakternya, tali tak kasat mata antara suami dan istri, serta wabah spiritual dan kebobrokan yang menerkam kehidupan mahligai pernikahan. Aku masih meresapi untaian katanya: "Para penyair dan penulis berikhtiar membedah realitas seorang wanita, namun hingga hari ini mereka tak jua sanggup menyelami rahasia yang tersembunyi di sudut hatinya, karena mereka meneropongnya dari seberang tabir hasrat ragawi dan tak melihat apa pun melainkan kulit luarnya; mereka memandangnya menembus kaca pembesar kebencian dan tak menjumpai apa pun di sana kecuali kelemahan dan kepatuhan absolut."</p>
+
+      <div class="pull-quote">
+        Di palung batu karang ini bersemayam dua simbol yang melukiskan saripati damba seorang wanita... Di antara Isytar yang duduk diagungkan di singgasana dan Maria yang berdiri menangis di sisi palang salib. Kaum pria memborong kejayaan dan nama besar, namun wanitalah yang menebus harganya.
+      </div>
+
+      <p>Tiada seorang pun yang mengendus ritus pertemuan rahasia kami selain Tuhan dan sekawanan burung merdeka yang mengepakkan sayap melintasi atap kuil. Selma acap kali tiba dengan keretanya di sebuah tempat bernama Taman Pasha dan dari titik itu ia melangkah kaki menuju kuil, di mana ia senantiasa menemukanku yang menantinya dengan debar kecemasan.</p>
+
+      <p>Kami tak digetarkan oleh mata-mata yang mengintai, tidak pula nurani kami merajam kami dengan keraguan; roh yang telah ditempa oleh bara api dan disucikan oleh derai air mata menjelma jauh lebih luhur daripada apa yang cemoohan orang sebut sebagai aib dan rasa malu; ia telah melepaskan diri dari rantai hukum perbudakan dan adat-istiadat usang yang memasung afeksi luhur hati manusia. Roh itu sanggup berdiri pongah tanpa sesal di hadapan takhta peradilan Tuhan.</p>
+
+      <p>Kerumunan masyarakat manusia telah bertekuk lutut selama tujuh puluh abad di bawah bayang-bayang hukum yang bobrok hingga mereka tunanetra akan makna hukum-hukum maha luhur dan abadi. Sepasang mata manusia telah terbiasa buta oleh pendar cahaya lilin yang temaram hingga mereka tak lagi kuasa menatap benderang mentari. Penyakit spiritual merayap turun temurun dari satu generasi ke generasi selanjutnya hingga ia mengakar menjadi bagian tak terpisahkan dari manusia, yang memandangnya, tak lagi sebagai wabah, melainkan karunia alami, yang dititipkan Tuhan kepada Adam. Bila kaum yang buta itu menjumpai seseorang yang bersih dari benih penyakit ini, mereka akan memandangnya dengan balutan rasa nista dan aib.</p>
+
+      <p>Mereka yang menenun prasangka keji atas Selma Karamy lantaran ia melangkahkan kakinya dari rumah suaminya dan bersua denganku di kuil adalah jiwa-jiwa berpenyakit dan berkepala kerdil yang memandang insan yang waras dan merdeka sebagai pemberontak. Mereka tak ubahnya serangga nista yang merayap di dalam kegelapan lantaran gentar diinjak oleh pejalan kaki yang lalu lalang.</p>
+
+      <p>Sang tawanan yang tertindas, yang sejatinya sanggup mendobrak sel penjaranya namun urung berbuat demikian, tak lebih dari seorang pengecut. Selma, tawanan yang lugu dan diinjak-injak, tak kuasa mematahkan rantai yang membelenggunya dari perbudakan. Pantaskah ia dihakimi hanya lantaran ia mencuri pandang menembus jeruji jendela penjaranya ke arah padang hijau dan langit yang lapang? Akankah mulut orang-orang menobatkannya sebagai pengkhianat bagi suaminya hanya lantaran ia kabur dari sangkarnya untuk duduk di sisiku di antara Kristus dan Isytar? Biarlah lidah-lidah mereka menyemburkan apa saja yang mereka hasratkan; Selma telah mengarungi rawa-rawa kelam yang menenggelamkan roh-roh lain dan telah berlabuh di atas dunia yang tak kuasa dijangkau oleh lolongan serigala-serigala buas maupun derik ular-ular berbisa. Manusia boleh memuntahkan apa pun perihal diriku, karena roh yang telah menatap wajah hantu maut tak mungkin lagi digetarkan oleh topeng-topeng para penyamun; seorang serdadu yang telah menatap kilatan bilah-bilah pedang berdansa di atas kepalanya dan genangan darah membanjir di bawah telapak kakinya tak akan lagi memalingkan wajah pada kerikil batu yang dilemparkan ke arahnya oleh anak-anak di jalanan.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB IX -->
+  <div class="chapter" id="kurban">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab IX</span>
+      <h2 class="chapter-title">Sebuah Pengorbanan</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Suatu hari di penghujung bulan Juni, tatkala khalayak meninggalkan kota menuju pegunungan untuk menghindari terik musim panas, aku pergi menuju kuil seperti biasa untuk bersua Selma, membawa bersamaku sebuah buku kecil berisi puisi-puisi Andalusia. Setibanya di kuil aku duduk menanti Selma, sesekali melirik lembaran-lembaran bukuku, mendaraskan bait-bait yang memenuhi relung hatiku dengan ekstasi dan membawa jiwaku pada kenangan akan para raja, penyair, dan kesatria yang mengucapkan salam perpisahan pada Granada, dan meninggalkan istana, institusi, serta harapan mereka, dengan air mata berlinang dan duka di dalam hati. Sejam berselang kulihat Selma melangkah menyusuri tengah-tengah taman dan menghampiri kuil, bertumpu pada payungnya seakan ia tengah memikul seluruh beban dunia di atas pundaknya.</p>
+
+      <p>Tatkala ia melangkah masuk ke dalam kuil dan duduk di sisiku, kutangkap seberkas perubahan di sepasang matanya dan aku tak sabar untuk menanyakannya. Selma merasakan apa yang bergejolak di benakku, dan ia meletakkan tangannya di atas kepalaku dan berkata, "Kemarilah mendekat padaku, kemarilah kekasihku, kemari dan biarkan aku memuaskan dahagaku, karena jam perpisahan telah tiba."</p>
+
+      <p>Aku bertanya kepadanya, "Apakah suamimu mengendus perjumpaan kita di sini?"</p>
+
+      <p>Ia menjawab, "Suamiku tak peduli padaku, tidak pula ia tahu bagaimana aku menghabiskan waktuku, karena ia sibuk dengan gadis-gadis malang yang digiring oleh kemiskinan ke rumah-rumah pelacuran; gadis-gadis yang menjual tubuh mereka demi sepotong roti, yang diuli dengan darah dan air mata."</p>
+
+      <p>Aku menimpali, "Apa yang menghalangimu untuk datang ke kuil ini dan duduk di sisiku dengan takzim di hadapan Tuhan? Apakah jiwamu yang memintakan perpisahan kita?"</p>
+
+      <p>Ia menjawab dengan linangan air mata, "Tidak, kekasihku, rohku tak meminta perpisahan, karena kau adalah belahan diriku. Mataku tak pernah letih memandangmu, karena kau adalah cahayanya; namun andaikata takdir menitahkan bahwa aku mesti menyusuri jalan hidup yang terjal dengan sarat belenggu, akankah aku sudi bila nasibmu menjadi serupa denganku?" Lalu ia menambahkan, "Aku tak sanggup mengudarakan segalanya, karena lidah ini kelu oleh kepedihan dan tak kuasa bertutur; bibir ini terkunci oleh kenestapaan dan tak sanggup bergerak; hal yang bisa kusampaikan padamu hanyalah bahwa aku takut kau akan terperosok ke dalam perangkap yang sama denganku."</p>
+
+      <p>Kala aku bertanya, "Apa maksudmu, Selma, dan siapa yang kau takutkan?"</p>
+
+      <p>Ia menyembunyikan wajahnya di balik tangannya dan berkata, "Sang Uskup telah mengetahui bahwa sebulan sekali aku pergi meninggalkan liang lahat tempat ia menguburku."</p>
+
+      <p>Aku menyelidik, "Apakah sang Uskup mengetahui perjumpaan kita di sini?"</p>
+
+      <p>Ia menjawab, "Andai ia tahu, kau tak akan melihatku duduk di sisimu di sini, namun ia mulai menaruh curiga dan ia telah menitahkan seluruh pelayan dan penjaganya untuk mengawasiku lekat-lekat. Kurasakan bahwa rumah yang kutinggali dan jalan yang kutapaki seolah memiliki mata yang mengintaiku, dan jari-jemari yang menunjuk ke arahku, serta telinga yang menyimak bisikan pikiran-pikiranku."</p>
+
+      <p>Ia membisu sejenak, lalu menambahkan, dengan derai air mata membasahi pipinya, "Aku tak takut pada sang Uskup, karena basah tak lagi menggetarkan ia yang tenggelam, namun aku takut kau mungkin jatuh ke dalam perangkap itu dan menjadi mangsanya; kau masih muda dan merdeka laksana cahaya mentari. Aku tak gentar pada takdir yang telah melesatkan seluruh anak panahnya ke dadaku, namun aku takut ular berbisa mungkin mematuk kakimu dan menahanmu dari mendaki puncak gunung di mana masa depan menantimu dengan kesenangan dan kejayaannya."</p>
+
+      <p>Aku berkata, "Barang siapa yang belum dipatuk oleh ular-ular cahaya dan tak pernah diterkam oleh serigala-serigala kegelapan akan senantiasa diperdaya oleh siang dan malam. Namun dengarlah, Selma, dengarkanlah lekat-lekat; apakah perpisahan adalah satu-satunya jalan untuk menghindari kejahatan dan kelicikan orang-orang? Apakah jalan cinta dan kebebasan telah terputus dan tak ada lagi yang tersisa selain ketundukan pada kehendak para budak maut?"</p>
+
+      <p>Ia menjawab, "Tiada yang tersisa kecuali perpisahan dan mengudarakan salam perpisahan satu sama lain."</p>
+
+      <p>Dengan roh yang memberontak kuraih tangannya dan berkata dengan penuh gairah, "Kita telah tunduk pada kehendak orang-orang untuk waktu yang teramat lama; sejak kali pertama kita berjumpa hingga detik ini kita telah digiring oleh orang-orang buta dan telah beribadah bersama mereka di hadapan berhala-berhala mereka. Sejak saat aku mengenalmu kita telah berada di genggaman sang Uskup laksana dua bola yang ia lempar sesuka hatinya. Apakah kita akan bertekuk lutut pada kehendaknya hingga maut menjemput kita? Apakah Tuhan meniupkan napas kehidupan kepada kita hanya untuk diletakkan di bawah telapak kaki maut? Apakah Dia memberi kita kemerdekaan hanya untuk menjadikannya bayang-bayang perbudakan? Barang siapa memadamkan api di dalam rohnya dengan tangannya sendiri adalah seorang murtad di mata Surga, karena Surgalah yang menyalakan api yang berkobar di dalam jiwa kita. Barang siapa yang tidak memberontak melawan penindasan berarti ia tengah berbuat tidak adil pada dirinya sendiri. Aku mencintaimu, Selma, dan kau pun mencintaiku; dan Cinta adalah sebuah harta yang teramat berharga, ia adalah anugerah Tuhan bagi roh-roh yang peka dan luhur. Akankah kita membuang harta ini dan membiarkan kawanan babi menyerakkannya dan menginjak-injaknya? Dunia ini sarat akan keajaiban dan keindahan.</p>
+
+      <p>Mengapa kita bermukim di dalam terowongan sempit yang telah digali oleh sang Uskup beserta antek-anteknya bagi kita? Kehidupan dipenuhi kebahagiaan dan kemerdekaan; mengapa kita tak melepas kuk berat ini dari pundak kita dan menghancurkan rantai yang membelenggu pergelangan kaki kita, lalu melangkah bebas menuju kedamaian? Bangkitlah dan mari kita tinggalkan kuil kecil ini menuju bait suci Tuhan yang maha agung. Mari kita tinggalkan negeri ini dengan segenap perbudakan dan kebodohannya menuju negeri lain nun jauh di sana yang tak terjangkau oleh tangan-tangan sang pencuri. Mari kita beranjak ke pesisir di bawah selimut malam dan menumpang perahu yang akan membawa kita menyeberangi lautan, di mana kita dapat menemukan kehidupan baru yang sarat kebahagiaan dan pengertian. Jangan ragu, Selma karena menit-menit ini lebih berharga bagi kita ketimbang mahkota para raja dan lebih agung dari singgasana para malaikat. Mari kita ikuti pilar cahaya yang menuntun kita keluar dari gurun gersang ini menuju padang hijau tempat bebungaan dan tanaman semerbak tumbuh mekar."</p>
+
+      <p>Ia menggelengkan kepalanya dan menatap sesuatu yang tak kasatmata di langit-langit kuil; seulas senyum penuh lara merekah di bibirnya; lalu ia berkata, "Tidak, tidak kekasihku. Surga telah meletakkan di tanganku sebuah piala, yang berlimpah cuka dan empedu; aku memaksa diriku sendiri untuk mereguknya demi mengecap puncak kepahitan di dasarnya hingga tak ada yang tersisa kecuali beberapa tetes, yang akan kuminum dengan penuh ketabahan. Aku tak pantas menerima kehidupan baru yang penuh cinta dan damai; aku tak cukup tangguh untuk kesenangan dan kemanisan hidup, karena burung dengan sayap yang patah tak akan sanggup mengangkasa di langit yang lapang. Mata yang telah terbiasa dengan cahaya temaram lilin tak akan cukup kuat untuk menatap lekat pada sang surya. Jangan bertutur padaku perihal kebahagiaan; kenangannya membuatku menderita lara. Jangan sebut-sebut kedamaian padaku; bayang-bayangnya menggetarkanku; namun tataplah aku dan aku akan memperlihatkan padamu obor suci yang telah dinyalakan Surga di tengah abu hatiku—kau tahu bahwa aku mencintaimu sebagaimana seorang ibu memuja anak semata wayangnya, dan hanya Cintalah yang mengajariku untuk melindungimu bahkan dari diriku sendiri. Cintalah, yang disucikan oleh lidah api, yang menahanku dari mengikutimu ke negeri terjauh. Cinta membunuh hasratku agar kau dapat hidup merdeka dan penuh kebajikan.</p>
+
+      <div class="pull-quote">
+        Cinta yang kerdil menuntut kepemilikan atas sang kekasih, namun cinta yang tak terbatas hanya menuntut dirinya sendiri. Cinta yang bersemi di antara keluguan dan kebangkitan masa muda memuaskan dirinya sendiri dengan memiliki...
+      </div>
+
+      <p>Namun Cinta yang lahir di pangkuan cakrawala dan turun ke bumi bersama rahasia-rahasia malam tak akan puas dengan apa pun selain Keabadian dan kekekalan; ia tak berdiri dengan takzim di hadapan apa pun kecuali dewa.</p>
+
+      <p>Tatkala aku menyadari bahwa sang Uskup hendak menghalangiku keluar dari rumah keponakannya dan berniat merampas satu-satunya kesenanganku, aku berdiri mematung di ambang jendela kamarku dan memandang ke arah laut, membayangkan negeri-negeri luas di seberang sana serta kemerdekaan sejati dan kebebasan diri yang sanggup direngkuh di sana. Kurasakan seolah aku hidup begitu karib denganmu, didekap oleh bayang-bayang rohmu, tenggelam di samudra afeksimu. Namun segala pusaran pikiran ini, yang menerangi hati seorang wanita dan membuatnya berontak melawan adat usang serta hidup di bawah naungan kebebasan dan keadilan, membuatku percaya bahwa aku ini lemah dan bahwa cinta kita terbatas serta rapuh, tak kuasa berdiri menantang paras mentari. Aku menangis layaknya seorang raja yang kerajaan dan harta karunnya telah dirampas, namun seketika kulihat wajahmu menembus derai air mataku dan matamu menatapku lekat dan teringatlah aku akan untaian katamu padaku di suatu waktu (Kemarilah, Selma, kemarilah dan biarlah kita menjelma menara-menara teguh di hadapan amuk badai. Biarlah kita berdiri laksana serdadu-serdadu gagah berani di hadapan musuh dan menantang senjatanya. Bila kita terbunuh, kita akan mati sebagai syuhada; dan jika kita menang, kita akan hidup sebagai pahlawan. Menantang rintangan dan kesukaran jauh lebih luhur ketimbang mundur menuju ketenangan.) Barisan kata ini, kekasihku, kau lafalkan tatkala sayap-sayap maut tengah mengepak mengitari ranjang ayahku; aku mengingatnya kemarin saat sayap-sayap keputusasaan tengah berkelebat di atas kepalaku. Kuteguhkan diriku dan kurasakan, di dalam gelapnya penjaraku, semacam kemerdekaan yang teramat berharga yang meringankan beban kesukaran kita dan memangkas duka lara kita. Kusadari bahwa cinta kita sedalam samudra dan setinggi gemintang serta selapang hamparan langit. Aku datang ke sini untuk bersua denganmu, dan di dalam rohku yang rapuh terdapat sebuah ketangguhan baru, dan ketangguhan ini adalah kemampuan untuk mengorbankan sebuah hal besar demi merengkuh hal yang jauh lebih besar; ia adalah pengorbanan atas kebahagiaanku agar kau tetap bajik dan terhormat di mata khalayak dan jauh dari pengkhianatan serta penindasan mereka.</p>
+
+      <p>Di masa lalu, manakala aku melangkah ke tempat ini kurasakan seolah rantai-rantai besi menyeretku jatuh, namun hari ini aku datang ke mari dengan kebulatan tekad yang mentertawakan belenggu itu dan memendekkan jarak jalan. Dahulu aku mendatangi kuil ini bagai hantu yang dicekam ngeri, namun hari ini aku datang laksana wanita pemberani yang meresapi urgensi akan pengorbanan dan memahami nilai sebuah penderitaan, wanita yang berhasrat untuk melindungi sosok yang dicintainya dari kebodohan orang-orang dan dari rohnya yang lapar. Dahulu aku duduk di sisimu laksana bayangan yang gemetar, namun hari ini aku datang ke mari untuk menunjukkan padamu jati diriku yang sesungguhnya di hadapan Isytar dan Kristus.</p>
+
+      <p>Aku adalah sebatang pohon, yang tumbuh di bawah rimbun bayangan, dan hari ini kurentangkan dahan-dahanku agar menggigil sejenak di bawah terpaan cahaya siang. Aku datang ke mari untuk merapal salam perpisahan, kekasihku, dan adalah harapanku agar perpisahan kita akan mewujud agung dan dahsyat laksana cinta kita. Biarlah perpisahan kita menyerupai bara api yang membengkokkan emas dan menjadikannya lebih berkilau."</p>
+
+      <p>Selma tak mengizinkanku bertutur maupun protes, sebaliknya ia menatapku, matanya berbinar, raut wajahnya mempertahankan keanggunannya, tampak seperti malaikat yang pantas dihormati dalam diam. Lalu ia melemparkan dirinya ke pelukanku, sesuatu yang belum pernah ia lakukan sebelumnya, dan melingkarkan lengan halusnya di leherku dan mendaratkan ciuman yang panjang, dalam, dan menyala di bibirku.</p>
+
+      <p>Tatkala mentari meredup turun, menarik berkas sinarnya dari taman dan kebun-kebun itu, Selma melangkah ke pusaran kuil dan memandangi dinding serta sudut-sudutnya lama-lama seakan ia hendak menuangkan cahaya dari sepasang matanya ke atas lukisan dan simbol-simbol itu. Kemudian ia melangkah ke depan dan berlutut dengan takzim di hadapan lukisan Kristus lalu mengecup kaki-Nya, dan ia berbisik, "Oh, Kristus, aku telah memilih Salib-Mu dan menelantarkan dunia Isytar yang penuh kesenangan dan kebahagiaan; aku telah mengenakan mahkota duri dan mencampakkan mahkota dafnah dan membasuh diriku dengan darah serta air mata alih-alih wewangian dan parfum; aku telah mereguk cuka dan empedu dari piala yang sejatinya diperuntukkan bagi anggur dan madu; terimalah aku, Tuhanku, di antara para pengikut-Mu dan tuntunlah aku menuju Galilea bersama mereka yang telah memilih-Mu, yang tabah dengan penderitaan mereka dan bersuka cita di dalam duka nestapa mereka."</p>
+
+      <p>Saat ia bangkit dan menatapku ia berkata, "Kini aku akan kembali dengan riang ke dalam guaku yang kelam, tempat para hantu mengerikan bermukim. Jangan menaruh iba padaku, kekasihku, dan jangan merasa kasihan kepadaku, karena roh yang pernah sekali menatap bayangan Tuhan tak akan pernah lagi digetarkan, setelahnya, oleh hantu-hantu iblis. Dan mata yang pernah sekali menatap Surga tak akan kuasa dibutakan oleh kepedihan dunia."</p>
+
+      <p>Mengudarakan kata-kata itu, Selma beranjak pergi meninggalkan tempat ibadah itu; dan aku tetap di sana terdampar di lautan pemikiran yang dalam, terhanyut di alam wahyu tempat Tuhan duduk di singgasana dan malaikat-malaikat mencatat laku perbuatan manusia, dan roh-roh mendaraskan tragedi kehidupan, dan pengantin-pengantin Surga menyanyikan himne cinta, duka, dan keabadian.</p>
+
+      <p>Malam telah rebah tatkala aku terjaga dari pingsanku dan mendapati diriku linglung di tengah-tengah taman, mengulang-ulang gema setiap kata yang dilafalkan oleh Selma dan mengenang kebisuan,, gerak-geriknya, raut parasnya serta sentuhan tangannya, hingga aku meresapi makna perpisahan dan rasa sakit dari keterasingan. Aku merana dan patah hati. Itu adalah penemuan pertamaku akan fakta bahwa umat manusia, sekalipun mereka dilahirkan merdeka, akan tetap menjadi budak dari hukum-hukum kaku yang dikukuhkan oleh nenek moyang mereka; dan bahwa cakrawala, yang kita angankan sebagai hal yang tak berubah, sejatinya adalah ketundukan hari ini pada kehendak esok dan penyerahan hari kemarin pada titah hari ini - Sering kali, semenjak malam itu, aku memikirkan hukum spiritual yang membuat Selma lebih memilih kematian daripada kehidupan, dan acap kali aku menimbang perbandingan antara keluhuran pengorbanan dan kebahagiaan dari pemberontakan demi menyelisik manakah yang lebih luhur dan lebih jelita; namun hingga detik ini aku hanya mampu menyuling satu kebenaran tunggal dari seluruh perkara tersebut, dan kebenaran ini adalah ketulusan, yang membuat segenap laku kita menjadi indah dan terhormat. Dan ketulusan ini bersemayam di dalam diri Selma Karamy.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · · ✦ · · ·</div>
+
+  <!-- BAB X -->
+  <div class="chapter" id="penyelamat">
+    <div class="chapter-header">
+      <span class="chapter-number">Bab X</span>
+      <h2 class="chapter-title">Sang Penyelamat</h2>
+      <div class="chapter-divider"><span>❧</span></div>
+    </div>
+    <div class="prose">
+      <p>Lima tahun bahtera pernikahan Selma berlalu tanpa kehadiran keturunan untuk memperkokoh simpul relasi spiritual antara ia dan suaminya serta menautkan roh mereka yang saling berseteru.</p>
+
+      <p>Seorang wanita mandul senantiasa dipandang dengan sebelah mata di mana-mana lantaran hasrat kebanyakan pria untuk mengabadikan diri mereka melalui generasi penerus. Pria yang berharta memandang istrinya yang tak berketurunan laksana seorang musuh; ia membencinya dan menelantarkannya serta mengharapkan kematiannya. Mansour Bey Galib adalah sosok pria semacam itu; secara materi, ia tak ubahnya segumpal tanah, dan keras bagai baja serta serakah layaknya liang lahat. Dambanya akan seorang anak yang kelak memanggul nama dan reputasinya membuatnya membenci Selma kendati istrinya itu begitu jelita dan manis.</p>
+
+      <p>Pohon yang tumbuh di dalam gua tak akan berbuah; dan Selma, yang bernapas di bawah bayang-bayang hidup, tak pula melahirkan keturunan..... Burung bulbul tak akan membangun sarangnya di dalam sangkar karena ngeri jika perbudakan akan menjadi nasib bagi anak-anaknya.... Selma adalah seorang tawanan nestapa dan adalah kehendak Surga bahwa ia tak akan melahirkan tawanan lain untuk berbagi kemalangan hidupnya. Bunga-bunga di padang adalah anak-anak dari sentuhan mentari dan afeksi alam; dan anak-anak manusia adalah bunga-bunga dari cinta dan belas kasih.....</p>
+
+      <p>Roh cinta dan belas kasih tak pernah menaungi kediaman Selma yang megah di Ras Beyrouth; kendati demikian, ia berlutut setiap malam di hadapan Surga dan memohon kepada Tuhan akan seorang anak yang di dalamnya ia sanggup menemukan pelipur lara dan ketenangan... Ia berdoa tanpa putus hingga Surga mengabulkan doa-doanya....</p>
+
+      <p>Pohon di dalam gua itu pada akhirnya mekar untuk berbuah. Burung bulbul di dalam sangkar mulai merajut sarang dari cabutan bulu-bulu sayapnya. Selma membentangkan lengannya yang terbelenggu ke arah Surga untuk menyambut karunia Tuhan yang paling berharga dan tiada hal di muka bumi ini yang sanggup membuatnya lebih bahagia daripada penantian menjadi seorang ibu. Ia menanti dengan debar kecemasan, menghitung hari dan merindukan jam tatkala senandung Surga yang paling merdu, suara bayinya, akan berdengung di telinganya....</p>
+
+      <p>Ia mulai sanggup menyaksikan fajar dari masa depan yang lebih cerah menembus derai air matanya.</p>
+
+      <p>Pada bulan Nisan-lah Selma tergolek di atas ranjang lara dan persalinan, di mana sang hidup dan sang maut tengah bergumul. Sang tabib dan bidan bersiap untuk mengantarkan ke dunia ini sesosok tamu baru. Larut malam Selma memulai jeritan panjangnya... jeritan perpisahan hidup dari yang hidup... jerit keberlanjutan di cakrawala kehampaan.. jerit kekuatan yang rapuh di hadapan kesunyian kuasa maha dahsyat... jerit Selma yang malang yang tengah berbaring di dalam palung keputusasaan di bawah telapak kaki kehidupan dan maut.</p>
+
+      <p>Saat fajar merekah Selma melahirkan seorang bayi laki-laki. Tatkala ia membuka matanya ia melihat wajah-wajah berseri di seantero ruangan, lalu ia menatap sekali lagi dan mendapati maut dan kehidupan masih saling bergumul di sisi ranjangnya. Ia memejamkan mata dan menangis, melafalkan untuk kali pertama, "Oh, putraku." Bidan membalut bayi itu dengan bedung sutra dan meletakkannya di sisi ibunya, namun sang tabib terus menatap Selma dan menggelengkan kepalanya dengan duka.</p>
+
+      <p>Suara pekik sukacita membangunkan para tetangga, yang bergegas merangsek ke dalam rumah untuk memberi selamat kepada sang ayah atas kelahiran ahli warisnya, namun sang tabib masih terpaku menatap Selma dan bayinya serta menggelengkan kepalanya....</p>
+
+      <p>Para pelayan bergegas menghambur menyebarkan kabar gembira itu kepada Mansour Bey, namun tabib memandangi Selma dan anaknya dengan sorot kekecewaan yang kentara di wajahnya.</p>
+
+      <p>Tatkala mentari menyembul, Selma merengkuh bayi itu ke dadanya; sang bayi membuka matanya untuk kali pertama dan menatap ibunya; lalu ia menggigil dan memejamkan matanya untuk selamanya. Tabib mengambil sang bayi dari dekapan Selma dan air mata luruh di pipinya; lalu ia bergumam pada dirinya sendiri, "Ia adalah seorang tamu yang hendak undur diri."</p>
+
+      <p>Sang anak menghembuskan napas terakhir sementara para tetangga tengah bersuka ria bersama sang ayah di balairung agung di dalam rumah dan bersulang demi kesehatan ahli waris mereka; dan Selma memandang sang tabib, lalu memohon, "Kembalikan anakku dan biarkan aku memeluknya."</p>
+
+      <p>Meski sang anak telah tiada, denting cangkir-cangkir perjamuan kian riuh di balairung.....</p>
+
+      <div class="pull-quote">
+        Napas hidupnya bermula di penghujung malam dan purna di awal siang, ibarat setitik embun yang ditumpahkan oleh mata malam dan dikeringkan oleh cumbuan cahaya siang.
+      </div>
+
+      <p>Ia lahir di waktu fajar dan wafat di kala matahari terbit... Ia terlahir laksana secercah pemikiran dan mati bagai embusan napas serta menguap sirna menyerupai bayangan. Ia tak diizinkan hidup untuk menghibur dan meredakan lara ibunya. Sebutir mutiara yang diantarkan oleh ombak pasang ke pesisir dan diseret kembali oleh ombak surut ke kedalaman samudra.... Sekuntum bunga bakung yang baru saja merekah dari kuncup kehidupan dan diremukkan di bawah tapak kaki kematian. Sesosok tamu terkasih yang kehadirannya memancarkan cahaya pada hati Selma dan yang kepergiannya membunuh jiwanya.</p>
+
+      <p>Inilah rupa dari lakon hidup manusia, lakon hidup bangsa-bangsa, kelangsungan sang surya, bulan, dan gemintang.</p>
+
+      <p>Dan Selma memusatkan matanya pada sang tabib dan menjerit tangis, "Kembalikan anakku padaku dan biarkan aku memeluknya; berikan padaku bayiku dan biarkan aku menyusuinya."</p>
+
+      <p>Sang tabib lantas menundukkan kepalanya. Suaranya tersekat dan ia berkata, "Putramu telah berpulang, Nyonya, tabahkanlah hatimu."</p>
+
+      <p>Mendengar proklamasi tabibnya, Selma melengkingkan jeritan yang memilukan. Lalu ia terdiam sesaat dan tersenyum bahagia. Rautnya memancarkan pendar seakan ia baru saja menemukan sesuatu, dan dengan tenang ia berucap, "Berikan anakku; bawalah ia mendekat dan biarkan aku menatap raganya yang telah mati."</p>
+
+      <p>Sang tabib menggendong mayat bayi itu kepada Selma dan membaringkannya di pelukannya. Ia mendekapnya, lalu memalingkan wajahnya menghadap dinding dan menyapa bayi malang itu, berkata, "Kau telah datang untuk menjemputku, anakku; kau telah datang untuk menuntunku menuju pesisir. Ini aku, sayangku; bimbinglah langkahku dan mari kita tinggalkan gua kelam ini."</p>
+
+      <p>Dan dalam hitungan menit sinar mentari menembus tirai jendela dan mengecup dua jasad beku yang tergolek di atas ranjang, dijaga oleh keagungan keheningan yang maha luhur dan dipayungi oleh sayap-sayap kematian. Tabib itu meninggalkan ruangan dengan derai air mata di pelupuknya, dan kala ia menginjakkan kaki di balairung agung, perayaan sukacita itu pun ditransformasi menjadi ratap duka pemakaman, namun Mansour Bey Galib tak sekalipun mengudarakan kata atau meneteskan sebutir air mata. Ia berdiri mematung mematung laksana patung ukiran, menggenggam cangkir anggur dengan tangan kanannya.</p>
+
+      <p>Di hari kedua Selma dibalut dengan gaun pengantin putihnya dan dibaringkan di dalam peti mati; kain kafan sang anak adalah kain bedungnya; peti matinya adalah rengkuhan lengan ibunya; dan liang lahatnya adalah dadanya yang membeku tenang. Dua mayat diusung di dalam satu peti mati, dan aku melangkah dengan takzim dalam iring-iringan khalayak yang menemani Selma dan bayinya menuju tempat peristirahatan terakhir mereka.</p>
+
+      <p>Setibanya di pekuburan, Uskup Galib memulai rapalan pujian sementara pendeta lainnya mendaraskan doa, dan di atas wajah-wajah muram mereka membayang sebuah selubung ketidaktahuan dan kehampaan.</p>
+
+      <p>Tatkala peti mati diturunkan, salah seorang pelayat berbisik, "Inilah untuk kali pertama di sepanjang hidupku aku menyaksikan dua mayat dibaringkan dalam satu peti mati."</p>
+
+      <p>Yang lain menimpali, "Tampaknya sang anak turun ke bumi hanya untuk menyelamatkan ibunya dari cengkeraman suaminya yang nirkasih."</p>
+
+      <p>Pelayat ketiga berkata, "Lihatlah Mansour Bey: ia menatap langit seakan matanya terbuat dari kaca. Ia sama sekali tak terlihat seperti seorang pria yang kehilangan istri dan anaknya di hari yang sama."</p>
+
+      <p>Yang keempat menambahkan, "Pamannya, sang Uskup, pasti akan menikahkannya lagi esok hari dengan wanita yang lebih kaya dan berkuasa."</p>
+
+      <p>Sang Uskup dan para pendeta terus melantunkan puji-pujian dan nyanyian hingga penggali kubur merampungkan tugasnya menutup liang lahat itu. Lalu, khalayak itu, satu demi satu, melangkah menghampiri sang Uskup dan keponakannya dan menyuguhkan rasa belasungkawa mereka dengan untaian kata-kata simpati yang manis, namun aku tetap berdiri dalam sunyi jauh di sudut, tanpa sesosok jiwa pun yang menghiburku, seolah Selma dan buah hatinya bukan siapa-siapa bagiku.</p>
+
+      <p>Para pengucap salam perpisahan undur diri dari pemakaman; sang penggali kubur berdiri di sisi pusara baru itu menggenggam sekop di tangannya.</p>
+
+      <p>Kala aku menghampirinya, aku bertanya, "Apakah kau ingat di mana persisnya Farris Effandi Karamy dimakamkan?"</p>
+
+      <p>Ia memandangku sejenak, lalu menunjuk pada pusara Selma dan berkata, "Tepat di bawah ini; aku membaringkan putrinya di atasnya dan di atas dada sang putri tertidur lelap anaknya, dan ke atas mereka semua kucurahkan kembali tanah ini menggunakan sekop ini."</p>
+
+      <p>Lalu aku bergumam, "Di dalam liang lahat ini kau juga telah menguburkan separuh hatiku."</p>
+
+      <p>Saat penggali kubur itu menghilang di balik kerumunan pohon hawar, aku tak kuasa lagi menahannya; Aku tersungkur jatuh di atas pusara Selma dan menangis tersedu.</p>
+    </div>
+  </div>
+
+  <!-- EPILOGUE -->
+  <div class="epitaph">
+    <p>❧</p>
+    <br>
+    <p><em>"Oh, Tuhan, kasihanilah dan sembuhkanlah sayap-sayap kami yang patah."</em></p>
+    <br>
+    <p style="font-size:0.85rem; color: var(--mist); font-family: 'Cormorant Garamond', serif; letter-spacing: 0.1em;">— Selma Karamy</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="fleuron">❧</span>
+    <p>Sayap-Sayap Patah &nbsp;·&nbsp; Kahlil Gibran</p>
+    <p style="margin-top:8px; font-size:0.78rem;">Terjemahan Sastra ke dalam Bahasa Indonesia</p>
+  </footer>
+</main>
+</body>
+</html>
