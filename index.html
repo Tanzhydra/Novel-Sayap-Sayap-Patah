@@ -404,25 +404,313 @@
     .pull-quote { margin: 30px 0; }
     .toc { padding: 28px 24px; }
   }
+
+  /* ============================================================
+     THEME VARIABLES — DARK
+  ============================================================ */
+  body.theme-dark {
+    --ink: #cfc0a8;
+    --sepia: #b8956a;
+    --gold: #c9a340;
+    --gold-light: #dbb85a;
+    --parchment: #141c28;
+    --parchment-dark: #1e2a3a;
+    --cream: #0d1117;
+    --mist: #7a8fa6;
+    background: #0d1117;
+    color: #cfc0a8;
+  }
+  body.theme-dark nav {
+    background: rgba(13, 17, 23, 0.97);
+    border-bottom-color: #243040;
+  }
+  body.theme-dark .toc { background: #111927; border-color: #1e2a3a; }
+  body.theme-dark .pull-quote { background: #111927; }
+  body.theme-dark .epitaph { background: #111927; border-color: #1e2a3a; }
+  body.theme-dark footer { border-top-color: #1e2a3a; }
+  body.theme-dark ::-webkit-scrollbar-track { background: #0d1117; }
+  body.theme-dark body::before { opacity: 0.03; }
+
+  /* ============================================================
+     THEME VARIABLES — SEPIA WARM
+  ============================================================ */
+  body.theme-sepia {
+    --ink: #2c1a0e;
+    --sepia: #7a4a1e;
+    --gold: #a0722a;
+    --gold-light: #b8893c;
+    --parchment: #e4ceaa;
+    --parchment-dark: #cfb080;
+    --cream: #eed9b2;
+    --mist: #6b4f2e;
+    background: #eed9b2;
+    color: #2c1a0e;
+  }
+  body.theme-sepia nav {
+    background: rgba(238, 217, 178, 0.97);
+    border-bottom-color: #c09050;
+  }
+  body.theme-sepia .toc { background: #e4ceaa; border-color: #cfb080; }
+  body.theme-sepia .pull-quote { background: #e4ceaa; }
+  body.theme-sepia .epitaph { background: #e4ceaa; border-color: #cfb080; }
+  body.theme-sepia footer { border-top-color: #cfb080; }
+  body.theme-sepia ::-webkit-scrollbar-track { background: #eed9b2; }
+
+  /* ============================================================
+     FLOATING THEME TOGGLE BUTTON
+  ============================================================ */
+  .theme-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 20px;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .theme-fab-trigger {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+  }
+  .theme-fab-trigger:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.38); }
+  .theme-fab-trigger:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px) scale(0.97);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .theme-options.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+  }
+
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 14px 7px 11px;
+    border-radius: 24px;
+    border: 1.5px solid rgba(184,134,11,0.35);
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.83rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    backdrop-filter: blur(10px);
+  }
+  .theme-btn:hover { transform: translateX(-5px); box-shadow: 0 4px 18px rgba(0,0,0,0.28); }
+
+  .theme-btn[data-theme="normal"] { background: rgba(250,246,237,0.96); color: #5c3d1e; }
+  .theme-btn[data-theme="sepia"]  { background: rgba(238,217,178,0.96); color: #2c1a0e; }
+  .theme-btn[data-theme="dark"]   { background: rgba(18,26,38,0.97); color: #c9a96e; border-color: rgba(201,163,64,0.4); }
+
+  .theme-swatch {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+  .theme-btn[data-theme="normal"] .theme-swatch { background: #faf6ed; }
+  .theme-btn[data-theme="sepia"]  .theme-swatch { background: #eed9b2; }
+  .theme-btn[data-theme="dark"]   .theme-swatch { background: #0d1117; }
+
+  .theme-btn.is-active { box-shadow: 0 0 0 2px var(--gold), 0 4px 14px rgba(0,0,0,0.22); }
+
+  /* ============================================================
+     READING PROGRESS BAR
+  ============================================================ */
+  #readingProgress {
+    position: fixed;
+    top: 0; left: 6px; right: 6px;
+    height: 2px;
+    z-index: 201;
+    pointer-events: none;
+  }
+  #readingProgressFill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    transition: width 0.12s linear;
+  }
+
+  /* ============================================================
+     LAST-READ TOAST NOTIFICATION
+  ============================================================ */
+  #lastReadToast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    z-index: 600;
+    background: var(--cream);
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 8px 36px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Cormorant Garamond', serif;
+    max-width: 360px;
+    width: calc(100vw - 120px);
+    transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #lastReadToast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .toast-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+
+  .toast-body { flex: 1; min-width: 0; }
+  .toast-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .toast-msg {
+    font-size: 0.9rem;
+    color: var(--mist);
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toast-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+  .toast-btn {
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1.5px solid var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+    line-height: 1.2;
+  }
+  .toast-btn-yes { background: var(--gold); color: #fff; }
+  .toast-btn-yes:hover { filter: brightness(1.12); }
+  .toast-btn-no  { background: transparent; color: var(--mist); border-color: var(--parchment-dark); }
+  .toast-btn-no:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Saved indicator dot in nav */
+  #bookmarkDot {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.4s;
+    cursor: default;
+    user-select: none;
+  }
+  #bookmarkDot.visible { opacity: 1; }
+  #bookmarkDot span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    animation: bmBlink 2.5s ease-in-out infinite;
+  }
+  @keyframes bmBlink {
+    0%,100% { opacity:1; } 50% { opacity:0.25; }
+  }
+
+  @media (max-width: 500px) {
+    .theme-fab { bottom: 20px; right: 14px; }
+    #lastReadToast { width: calc(100vw - 48px); padding: 12px 14px; gap: 10px; }
+    .toast-msg { font-size: 0.82rem; }
+  }
 </style>
 </head>
 <body>
+<!-- Reading progress bar -->
+<div id="readingProgress"><div id="readingProgressFill"></div></div>
+
 <div class="right-border"></div>
+
+<!-- Theme Toggle FAB -->
+<div class="theme-fab" id="themeFab">
+  <div class="theme-options" id="themeOptions">
+    <button class="theme-btn is-active" data-theme="normal">
+      <span class="theme-swatch"></span> Perkamen
+    </button>
+    <button class="theme-btn" data-theme="sepia">
+      <span class="theme-swatch"></span> Sepia
+    </button>
+    <button class="theme-btn" data-theme="dark">
+      <span class="theme-swatch"></span> Gelap
+    </button>
+  </div>
+  <button class="theme-fab-trigger" id="themeFabTrigger" aria-label="Ganti tema">🎨</button>
+</div>
+
+<!-- Last-Read Toast -->
+<div id="lastReadToast" role="status">
+  <div class="toast-icon">📖</div>
+  <div class="toast-body">
+    <div class="toast-label">Penanda Terakhir</div>
+    <div class="toast-msg" id="toastMsg">Lanjutkan membaca?</div>
+  </div>
+  <div class="toast-actions">
+    <button class="toast-btn toast-btn-yes" id="toastYes">Lanjut</button>
+    <button class="toast-btn toast-btn-no" id="toastNo">Abaikan</button>
+  </div>
+</div>
 
 <nav>
   <span class="nav-title">Sayap-Sayap Patah · Gibran</span>
+  <div style="display:flex;align-items:center;gap:16px;">
+  <div id="bookmarkDot" title="Posisi tersimpan otomatis"><span></span> Tersimpan</div>
   <div class="nav-chapters">
     <a href="#kata-pengantar">Kata Pengantar</a>
     <a href="#duka-bisu">Duka Bisu</a>
     <a href="#takdir">Takdir</a>
     <a href="#serambi">Serambi</a>
     <a href="#obor">Obor Putih</a>
-    <a href="#badai">Sang Badai</a>
-    <a href="#danau">Telaga Api</a>
-    <a href="#takhta">Singgasana Kematian</a>
-    <a href="#kristus">Kristus & Isytar</a>
-    <a href="#kurban">Pengorbanan</a>
+    <a href="#badai">Badai</a>
+    <a href="#danau">Danau Api</a>
+    <a href="#takhta">Takhta Maut</a>
+    <a href="#kristus">Kristus & Ishtar</a>
+    <a href="#kurban">Kurban</a>
     <a href="#penyelamat">Penyelamat</a>
+  </div>
   </div>
 </nav>
 
@@ -442,15 +730,15 @@
     <p class="toc-title">Daftar Isi</p>
     <ol>
       <li><a href="#kata-pengantar">Kata Pengantar</a></li>
-      <li><a href="#duka-bisu">Duka yang Bisu</a></li>
+      <li><a href="#duka-bisu">Duka yang Membisu</a></li>
       <li><a href="#takdir">Tangan Takdir</a></li>
-      <li><a href="#serambi">Gerbang Menuju Kuil Suci</a></li>
-      <li><a href="#obor">Obor Putih</a></li>
-      <li><a href="#badai">Sang Badai</a></li>
-      <li><a href="#danau">Telaga Api</a></li>
-      <li><a href="#takhta">Di Hadapan Singgasana Kematian</a></li>
-      <li><a href="#kristus">Di Antara Kristus dan Isytar</a></li>
-      <li><a href="#kurban">Sebuah Pengorbanan</a></li>
+      <li><a href="#serambi">Serambi Pura</a></li>
+      <li><a href="#obor">Obor Nirmala</a></li>
+      <li><a href="#badai">Topan</a></li>
+      <li><a href="#danau">Danau Api</a></li>
+      <li><a href="#takhta">Di Hadapan Takhta Maut</a></li>
+      <li><a href="#kristus">Antara Kristus dan Ishtar</a></li>
+      <li><a href="#kurban">Kurban</a></li>
       <li><a href="#penyelamat">Sang Penyelamat</a></li>
     </ol>
   </div>
@@ -1142,6 +1430,159 @@
     <p>Sayap-Sayap Patah &nbsp;·&nbsp; Kahlil Gibran</p>
     <p style="margin-top:8px; font-size:0.78rem;">Terjemahan Sastra ke dalam Bahasa Indonesia</p>
   </footer>
+  <script>
+/* ============================================================
+   1. THEME TOGGLE — Dark / Sepia / Normal
+============================================================ */
+(function() {
+  var STORAGE_KEY_THEME = 'ssb_theme';
+  var body = document.body;
+  var fab = document.getElementById('themeFab');
+  var trigger = document.getElementById('themeFabTrigger');
+  var opts = document.getElementById('themeOptions');
+  var btns = document.querySelectorAll('.theme-btn');
+
+  var icons = { normal: '🎨', sepia: '📜', dark: '🌙' };
+
+  function applyTheme(theme) {
+    body.classList.remove('theme-dark', 'theme-sepia');
+    if (theme === 'dark')  body.classList.add('theme-dark');
+    if (theme === 'sepia') body.classList.add('theme-sepia');
+    trigger.textContent = icons[theme] || '🎨';
+    btns.forEach(function(b) {
+      b.classList.toggle('is-active', b.dataset.theme === theme);
+    });
+    try { localStorage.setItem(STORAGE_KEY_THEME, theme); } catch(e){}
+  }
+
+  /* restore saved theme */
+  var saved;
+  try { saved = localStorage.getItem(STORAGE_KEY_THEME); } catch(e){}
+  if (saved) applyTheme(saved);
+
+  /* open/close panel */
+  var open = false;
+  function togglePanel() {
+    open = !open;
+    opts.classList.toggle('open', open);
+  }
+  trigger.addEventListener('click', function(e) { e.stopPropagation(); togglePanel(); });
+  document.addEventListener('click', function() { if(open){ open=false; opts.classList.remove('open'); } });
+  opts.addEventListener('click', function(e){ e.stopPropagation(); });
+
+  /* theme selection */
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyTheme(btn.dataset.theme);
+      open = false;
+      opts.classList.remove('open');
+    });
+  });
+})();
+
+/* ============================================================
+   2. READING PROGRESS BAR
+============================================================ */
+(function() {
+  var fill = document.getElementById('readingProgressFill');
+  function update() {
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var scrollH = doc.scrollHeight - doc.clientHeight;
+    fill.style.width = (scrollH > 0 ? (scrollTop / scrollH * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ============================================================
+   3. AUTO READING MARKER — Last Read Position
+============================================================ */
+(function() {
+  var STORAGE_KEY_POS   = 'ssb_lastScroll';
+  var STORAGE_KEY_LABEL = 'ssb_lastLabel';
+  var TOAST_DELAY_MS    = 900;   /* show toast after page settles */
+  var SAVE_THROTTLE_MS  = 1200;  /* save scroll at most every 1.2s */
+  var MIN_SCROLL_PX     = 200;   /* don't restore if barely scrolled */
+
+  var toast   = document.getElementById('lastReadToast');
+  var toastMsg= document.getElementById('toastMsg');
+  var btnYes  = document.getElementById('toastYes');
+  var btnNo   = document.getElementById('toastNo');
+  var bmDot   = document.getElementById('bookmarkDot');
+
+  /* --- helpers --- */
+  function getHeadingNear(scrollY) {
+    /* find the chapter heading closest above current position */
+    var headings = document.querySelectorAll('.chapter-title');
+    var label = 'bagian awal';
+    headings.forEach(function(h) {
+      if (h.getBoundingClientRect().top + scrollY <= scrollY + 120) {
+        label = h.textContent.trim();
+      }
+    });
+    return label;
+  }
+
+  function showBmDot() {
+    bmDot.classList.add('visible');
+    clearTimeout(bmDot._hide);
+    bmDot._hide = setTimeout(function(){ bmDot.classList.remove('visible'); }, 2500);
+  }
+
+  /* --- save position (throttled) --- */
+  var saveTimer;
+  function savePosition() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function() {
+      var pos = window.scrollY || document.documentElement.scrollTop;
+      if (pos < MIN_SCROLL_PX) return; /* ignore top-of-page */
+      var label = getHeadingNear(pos);
+      try {
+        localStorage.setItem(STORAGE_KEY_POS, pos);
+        localStorage.setItem(STORAGE_KEY_LABEL, label);
+      } catch(e){}
+      showBmDot();
+    }, SAVE_THROTTLE_MS);
+  }
+  window.addEventListener('scroll', savePosition, { passive: true });
+
+  /* --- on load: check for saved position --- */
+  var savedPos, savedLabel;
+  try {
+    savedPos   = parseFloat(localStorage.getItem(STORAGE_KEY_POS));
+    savedLabel = localStorage.getItem(STORAGE_KEY_LABEL) || '';
+  } catch(e){}
+
+  if (savedPos && savedPos >= MIN_SCROLL_PX) {
+    toastMsg.textContent = '«' + savedLabel + '»';
+
+    setTimeout(function() {
+      toast.classList.add('show');
+    }, TOAST_DELAY_MS);
+
+    /* Yes: scroll back to saved position */
+    btnYes.addEventListener('click', function() {
+      toast.classList.remove('show');
+      /* smooth scroll to saved position */
+      window.scrollTo({ top: savedPos, behavior: 'smooth' });
+    });
+
+    /* No: dismiss and clear saved position */
+    btnNo.addEventListener('click', function() {
+      toast.classList.remove('show');
+      try {
+        localStorage.removeItem(STORAGE_KEY_POS);
+        localStorage.removeItem(STORAGE_KEY_LABEL);
+      } catch(e){}
+    });
+
+    /* auto-dismiss after 8s if no action */
+    setTimeout(function() { toast.classList.remove('show'); }, 8000);
+  }
+})();
+</script>
+
 </main>
 </body>
 </html>
