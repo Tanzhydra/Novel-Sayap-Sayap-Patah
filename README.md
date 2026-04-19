@@ -1,5 +1,6 @@
 # ❧ Sayap-Sayap Patah — Digital Library
 Repositori ini berisi publikasi web statis dari mahakarya Kahlil Gibran, **"Sayap-Sayap Patah"**, yang diterjemahkan secara puitis ke dalam Bahasa Indonesia.
+unuk novel saya menemukannya pada internet archive dalam bahasa inggris, dengan bantuan AI saya menterjemahkan novel tersebut dalam bahasa indonesia dan dimuat dalam bentuk web menggunakan html
 
 ## ✨ Fitur Utama
 * **Desain Klasik:** Tipografi menggunakan *Playfair Display* untuk nuansa sastra yang kental.
@@ -13,4 +14,4 @@ Repositori ini berisi publikasi web statis dari mahakarya Kahlil Gibran, **"Saya
 * GitHub Pages (Hosting)
 
 ## 📖 Cara Membaca
-Kunjungi versi live di: [Link GitHub Pages Kamu Akan Muncul Di Sini]
+Kunjungi versi live di: https://tanzhydra.github.io/Novel-Sayap-Sayap-Patah/
